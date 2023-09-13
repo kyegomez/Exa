@@ -84,6 +84,8 @@ nav:
       - Exa.inference:
         - Exa.inference.Inference: "exa/inference.md"
         - Exa.inference.GPTQInference: "exa/gptq_inference.md"
+      - Exa.quantize:
+        - Exa.quantize.Quantize: "exa/quantize.md"
 - Examples:
     - Overview: "examples/index.md"
     - FlashAttention: "examples/nn/attentions/flash.md"

@@ -7,6 +7,23 @@ class Quantize:
 
     #TODO: Add documentation as docstrings and in the docs folder
     #TODO: Add extensive error handling
+    """
+    Quantize provides a convenient way to load, quantize, and manage HuggingFace models, specifically designed for optimization.
+    
+    The primary goal of this class is to help users quantize HuggingFace models using the BitsAndBytes configuration to achieve faster inference times and to either push the optimized models to HuggingFace's model hub or load them from it.
+
+    Parameters:
+    - model_id (str): Model identifier to be loaded from the HuggingFace hub.
+    - bits (int, optional): Bit precision for quantization. Default is 4.
+    - threshold (float, optional): Threshold for quantization. Default is 6.0.
+    - skip_modules (list, optional): List of modules to skip during quantization. Default is None.
+    - enable_fp32_cpu_offload (bool, optional): If True, offload the FP32 computations to CPU. Default is False.
+    - has_fp16_weight (bool, optional): If True, indicates that the model has FP16 weights. Default is False.
+    - compute_dtype (str, optional): Data type for computation after quantization. Default is None.
+    - quant_type (str, optional): Type of quantization to apply. Default is "fp4".
+    - use_double_quant (bool, optional): If True, applies double quantization. Default is False.
+    - verbose (bool, optional): If True, provides more detailed logs. Default is False.
+    """
     def __init__(
         self,
         model_id,
@@ -54,6 +71,9 @@ class Quantize:
 
 
     def load_model(self):
+        """
+        Loads and quantizes the HuggingFace model using the provided parameters and configuration.
+        """
         try:
 
             #load the tokenizer and model
@@ -107,6 +127,12 @@ class Quantize:
             self.logger.error(f"An error occured while loading the model: {error} please understand the root cause then look at documentation for common errors")
     
     def push_to_hub(self, hub):
+        """
+        Pushes the quantized model and the associated tokenizer to the HuggingFace's model hub.
+
+        Parameters:
+        - hub (str): Hub name or identifier to which the model and tokenizer should be pushed.
+        """
         try:
                 
             #push the quantized model to the hub
@@ -119,6 +145,12 @@ class Quantize:
             self.logger.error(f"An error occured while pushing to the hub: {error}")
     
     def load_from_hub(self, hub):
+        """
+        Loads a quantized model from the HuggingFace's model hub.
+
+        Parameters:
+        - hub (str): Hub name or identifier from which the model should be loaded.
+        """
         try:
 
             #load a quantized model from the hub
