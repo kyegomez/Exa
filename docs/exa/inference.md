@@ -83,7 +83,7 @@ print(generated_text)
 ### Example 3: Using Quantization
 
 ```python
-from zeta import Inference
+from exa import Inference
 
 from finetuning_suite import Inference
 quantization_config = {

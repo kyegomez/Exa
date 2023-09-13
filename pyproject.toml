@@ -20,6 +20,11 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3.6"
 ]
+packages = [
+    { include = "exa" },
+    { include = "exa/**/*.py" },
+]
+
 
 [tool.poetry.dependencies]
 python = "^3.6"

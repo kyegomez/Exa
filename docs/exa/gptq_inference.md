@@ -88,7 +88,7 @@ print(output_text)
 ### Example 3: Specifying a Dataset for Quantization
 
 ```python
-from zeta import GPTQInference
+from exa import GPTQInference
 
 model_id = "gpt2-medium"
 inference_engine = GPTQInference(model_id, quantization_config_dataset="my_dataset")
