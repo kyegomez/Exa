@@ -79,11 +79,11 @@ nav:
 - Home:
     - Overview: "index.md"
 - Exa:
-    - Overview: "ft/index.md"
+    - Overview: "exa/index.md"
     - Exa:
       - Exa.inference:
-        - Exa.inference.Inference: "ft/inference.md"
-        - Exa.inference.GPTQInference: "ft/gptq_inference.md"
+        - Exa.inference.Inference: "exa/inference.md"
+        - Exa.inference.GPTQInference: "exa/gptq_inference.md"
 - Examples:
     - Overview: "examples/index.md"
     - FlashAttention: "examples/nn/attentions/flash.md"
