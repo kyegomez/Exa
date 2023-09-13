@@ -23,6 +23,8 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.6"
+transformers = "*"
+shapeless = "*"
 
 
 [tool.poetry.dev-dependencies]
