@@ -1,14 +1,14 @@
-# Finetuning Suite Docs
+# Exa Docs
 
-Welcome to Finetuning Suite's Documentation!
+Welcome to Exa Documentation!
 
-Finetuning Suite  is a modular framework that enables for seamless, reliable, and fluid finetuning and inference
+- Exa: An framework for an ultra-pythonic, super simple, Ultra-fast inference library for running LLMs locally on modern consumer-class GPUs
 
-## Finetuning Suite
+## Exa
 
 <!-- ![Zeta Banner](docs/assets/img/zetascale.png) -->
 
-Finetuning Suite  is a modular framework that enables for seamless, reliable, and fluid finetuning and inference
-[Click here for Finetuning Suite Documentation →](ft/)
+
+[Click here for Finetuning Exa Documentation →](exa/)
 
 

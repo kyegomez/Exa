@@ -46,7 +46,6 @@ model.run("What is your name")
 
 from exa import GPTQInference
 
-
 model_id = "facebook/opt-125m"
 model = GPTQInference(model_id=model_id, max_length=400)
 
