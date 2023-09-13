@@ -1,10 +1,14 @@
-[![Multi-Modality](images/agorabanner.png)](https://discord.gg/qUtxnK2NMf)
+[![Multi-Modality](agorabanner.png)](https://discord.gg/qUtxnK2NMf)
 
+# Exa
+Ultra-optimized fast inference library for running exascale LLMs locally on modern consumer-class GPUs.
 
-![Finetuning suite logo](images/ft-logo.png)
+## Principles
+- Radical Simplicity (Utilizing super-powerful LLMs with as minimal code as possible)
+- Ultra-Optimizated (High Performance classes that extract all the power from these LLMs)
+- Fludity & Shapelessness (Plug in and play and re-architecture as you please)
 
-Finetune any model with unparalled performance, speed, and reliability using Qlora, BNB, Lora, Peft in less than 30 seconds, just press GO.
-
+---
 
 # 🤝 Schedule a 1-on-1 Session
 Book a [1-on-1 Session with Kye](https://calendly.com/apacai/agora), the Creator, to discuss any issues, provide feedback, or explore how we can improve Zeta for you.
@@ -12,42 +16,20 @@ Book a [1-on-1 Session with Kye](https://calendly.com/apacai/agora), the Creator
 ---
 
 ## 📦 Installation 📦
+You can install the package using pip
 
 ```bash
-$ pip3 install ft-suite
+pip install exxa
 ```
+-----
 
----
-## 🚀 Quick Start 🚀
 
-### Finetuning
 
-```python
-from fts import FineTuner
-
-# Initialize the fine tuner
-model_id="google/flan-t5-xxl"
-dataset_name = "samsung"
-
-tuner = FineTuner(
-    model_id=model_id,
-    dataset_name=dataset_name,
-    max_length=150,
-    lora_r=16,
-    lora_alpha=32,
-    quantize=True
-)
-
-# Generate content
-prompt_text = "Summarize this idea for me."
-print(tuner(prompt_text))
-```
-
-----
+# Usage
 
 ## Inference
 ```python
-from fts import Inference
+from exa import Inference
 
 model = Inference(
     model_id="georgesung/llama2_7b_chat_uncensored",
@@ -62,7 +44,7 @@ model.run("What is your name")
 
 ```python
 
-from fts import GPTQInference
+from exa import GPTQInference
 
 
 model_id = "facebook/opt-125m"
@@ -74,7 +56,7 @@ print(result)
 
 ```
 
----
+-----
 
 ## 🎉 Features 🎉
 
@@ -86,79 +68,18 @@ print(result)
 
 - **Seamless Integration**: Designed to work seamlessly with popular models like LLAMA, Falcon, and more! 🤖
 
-
 ----
-
-## 🛣️ Roadmap 🛣️
-
-Here's a sneak peek into our ambitious roadmap! We're always evolving, and your feedback and contributions can shape our journey! ✨
-
-- [ ] **More Example Scripts**:
-  - [ ] Using GPT models
-  - [ ] Transfer learning examples
-  - [ ] Real-world application samples
-
-- [ ] **Polymorphic Preprocessing Function**:
-  - [ ] Design a function to handle diverse datasets
-  - [ ] Integrate with known dataset structures from popular sources
-  - [ ] Custom dataset blueprint for user-defined structures
-
-- [ ] **Extended Model Support**:
-  - [ ] Integration with Lama, Falcon, etc.
-  - [ ] Support for non-English models
-
-- [ ] **Comprehensive Documentation**:
-  - [ ] Detailed usage guide
-  - [ ] Best practices for fine-tuning
-  - [ ] Benchmarks for quantization and LoRA features
-  
-- [ ] **Interactive Web Interface**:
-  - [ ] GUI for easy fine-tuning
-  - [ ] Visualization tools for model insights
-
-- [ ] **Advanced Features**:
-  - [ ] Integration with other quantization techniques
-  - [ ] Support for more task types beyond text generation
-  - [ ] Model debugging and introspection tools
-  - [ ] Integrate TRLX from Carper
-
-... And so much more coming up!
-
------
 
 ## 💌 Feedback & Contributions 💌
 
 We're excited about the journey ahead and would love to have you with us! For feedback, suggestions, or contributions, feel free to open an issue or a pull request. Let's shape the future of fine-tuning together! 🌱
 
-----
+------
 
-## 📜 License 📜
 
+# License
 MIT
 
----
 
-# Share the Love! 💙
-
-Spread the message of the Finetuning-Suite, this is an foundational tool to help everyone quantize and finetune state of the art models.
-
-Sharing the project helps us reach more people who could benefit from it, and it motivates us to continue developing and improving the suite.
-
-Click the buttons below to share Finetuning-Suite on your favorite social media platforms:
-
-- [Share on Twitter](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fkyegomez%2FFinetuning-Suite&text=Check%20out%20Finetuning-Suite!%20A%20great%20resource%20for%20machine%20learning%20finetuning.%20%23AI%20%23MachineLearning%20%23GitHub)
-
-- [Share on Facebook](https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgithub.com%2Fkyegomez%2FFinetuning-Suite)
-
-- [Share on LinkedIn](https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fgithub.com%2Fkyegomez%2FFinetuning-Suite&title=Finetuning-Suite&summary=Check%20out%20this%20fantastic%20resource%20for%20machine%20learning%20finetuning!)
-
-- [Share on Reddit](https://reddit.com/submit?url=https%3A%2F%2Fgithub.com%2Fkyegomez%2FFinetuning-Suite&title=Check%20out%20Finetuning-Suite!)
-
-Also, we'd love to see how you're using Finetuning-Suite! Share your projects and experiences with us by tagging us on Twitter [@finetuning-suite](https://twitter.com/kyegomezb).
-
-Lastly, don't forget to ⭐️ the repository if you find it useful. Your support means a lot to us! Thank you! 💙
-
-
-----
 
 
