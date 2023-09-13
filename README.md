@@ -55,6 +55,25 @@ print(result)
 
 ```
 
+## Quantize
+
+```python
+from exa import Quantize
+
+#usage
+quantize = Quantize(
+     model_id="bigscience/bloom-1b7",
+     bits=8,
+     enable_fp32_cpu_offload=True,
+)
+
+quantize.load_model()
+quantize.push_to_hub("my model")
+quantize.load_from_hub('my model')
+
+
+```
+
 -----
 
 ## 🎉 Features 🎉
