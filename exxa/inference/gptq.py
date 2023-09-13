@@ -9,7 +9,8 @@ class GPTQInference:
         model_id,
         quantization_config_bits,
         quantization_config_dataset,
-        max_length
+        max_length,
+        verbose = False,
     ):
         self.model_id = model_id
         self.quantization_config_bits = quantization_config_bits

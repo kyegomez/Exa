@@ -9,13 +9,15 @@ class Inference:
             device: str = None, 
             max_length: int = 20, 
             quantize: bool = False, 
-            quantization_config: dict = None
+            quantization_config: dict = None,
+            verbose = False,
         ):
         super().__init__()
         self.logger = logging.getLogger(__name__)
         self.device = device if device else ('cuda' if torch.cuda.is_available() else 'cpu')
         self.model_id = model_id
         self.max_length = max_length
+        self.verbose = verbose
 
         bnb_config = None
         if quantize:
@@ -45,7 +47,7 @@ class Inference:
             prompt_text: str, 
             max_length: int = None
         ):
-        
+
         max_length = max_length if max_length else self.max_length
         try:
             inputs = self.tokenizer.encode(
