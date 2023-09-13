@@ -1,5 +1,5 @@
-site_name: Finetuning Suite Docs
-site_url: https://ft.apac.ai
+site_name: Exa Docs
+site_url: https://exa.apac.ai
 site_author: APAC AI
 site_description: Finetune any model with unparalled performance, speed, and reliability using Qlora, BNB, Lora, Peft in less than 30 seconds, just press GO.
 repo_name: kyegomez/exa
