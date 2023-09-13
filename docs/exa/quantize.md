@@ -77,7 +77,7 @@ Loads a quantized model from the HuggingFace model hub. It requires the tokenize
 
 1. **Basic Usage with 4-bit Quantization**:
     ```python
-    from shapeless import Quantize
+    from exa import Quantize
 
     quantize_instance = Quantize(
         model_id="bigscience/bloom-1b7",
@@ -89,7 +89,7 @@ Loads a quantized model from the HuggingFace model hub. It requires the tokenize
 
 2. **8-bit Quantization with FP32 CPU Offloading**:
     ```python
-    from shapeless import Quantize
+    from exa import Quantize
 
     quantize_instance = Quantize(
         model_id="bigscience/bloom-1b7",
@@ -102,7 +102,7 @@ Loads a quantized model from the HuggingFace model hub. It requires the tokenize
 
 3. **Pushing and Pulling Quantized Models to/from HuggingFace Hub**:
     ```python
-    from shapeless import Quantize
+    from exa import Quantize
 
     quantize_instance = Quantize(
         model_id="bigscience/bloom-1b7",

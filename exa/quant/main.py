@@ -4,9 +4,6 @@ from transformers import AutoModelForCasualLM, AutoTokenizer, BitsAndBytesConfig
 from transformers.errors import HuggingFaceError
 
 class Quantize:
-
-    #TODO: Add documentation as docstrings and in the docs folder
-    #TODO: Add extensive error handling
     """
     Quantize provides a convenient way to load, quantize, and manage HuggingFace models, specifically designed for optimization.
     
