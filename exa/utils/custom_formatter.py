@@ -11,6 +11,21 @@ class CustomFormatter(logging.Formatter):
 
     Attributes:
         format_mappings (dict): Mapping of logging levels to their associated color and format.
+    
+    ###########
+    import logging
+    from exa import CustomFormatter
+
+    logging.basicConfig(level=logging.INFO)
+    handler = logging.StreamHandler()
+    handler.setFormatter(CustomFormatter())
+    logger = logging.getLogger("CustomFormatterExample")
+    logger.addHandler(handler)
+
+    logger.info("This is an info message.")
+    logger.warning("This is a warning message.")
+    logger.error("This is an error message.")
+    logger.debug("This is a debug message.")
     """
 
     format_mappings = {
@@ -40,6 +55,13 @@ class ColoredLogger:
 
     Provides static methods to log messages with colors associated with
     their log levels. The actual coloring is handled by the CustomFormatter.
+
+    from exa import ColoredLogger
+
+    ColoredLogger.info("This is an info message from ColoredLogger.")
+    ColoredLogger.warning("This is a warning message from ColoredLogger.")
+    ColoredLogger.error("This is an error message from ColoredLogger.")
+    ColoredLogger.debug("This is a debug message from ColoredLogger.")
     """
 
     @staticmethod
@@ -90,15 +112,23 @@ def log_method_calls(cls):
     method's name upon entering and exiting the method. Useful for debugging
     and tracking the flow of the program.
     
-    Usage:
-    @log_method_calls
+    ```
+    from exa import log_metadata
+
+    @log_metadata
     class MyClass:
         def say_hello(self):
-            print("hello")
-        
-        def say_goodbye(self):
-            print(f"Goodbye!")
+            print("Hello from MyClass!")
 
+        def say_goodbye(self):
+            print("Goodbye from MyClass!")
+
+    # Using MyClass with log_metadata decorator
+    sample_instance = MyClass()
+    sample_instance.say_hello()
+    sample_instance.say_goodbye()
+    ```
+    
     Args:
         cls (type): The class to be wrapped.
 
