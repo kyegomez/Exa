@@ -4,7 +4,7 @@ import torch
 from torch.nn.parallel import DistributedDataParallel as DDP
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
-from exa.utils.custom_formatter import ColoredLogger
+# from exa.utils.custom_formatter import ColoredLogger, logger
 
 
 class Inference:
@@ -24,7 +24,7 @@ class Inference:
             quantize: bool = False, 
             quantization_config: dict = None,
             verbose = False,
-            logger=None,
+            # logger=None,
             distributed=False,
         ):
         """
@@ -44,7 +44,9 @@ class Inference:
         self.model_id = model_id
         self.max_length = max_length
         self.verbose = verbose
+        self.distributed = distributed
         self.model, self.tokenizer = None, None
+        
 
         if self.distributed:
             assert torch.cuda.device_count() > 1, "You need more than 1 gpu for distributed processing"
@@ -61,17 +63,17 @@ class Inference:
                 }
             bnb_config = BitsAndBytesConfig(**quantization_config)
 
-        # try:
-        #     self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
-        #     self.model = AutoModelForCausalLM.from_pretrained(
-        #         self.model_id, 
-        #         quantization_config=bnb_config
-        #     )
+        try:
+            self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
+            self.model = AutoModelForCausalLM.from_pretrained(
+                self.model_id, 
+                quantization_config=bnb_config
+            )
             
-        #     self.model.to(self.device)
-        # except Exception as e:
-        #     self.logger.error(f"Failed to load the model or the tokenizer: {e}")
-        #     raise
+            self.model.to(self.device)
+        except Exception as e:
+            self.logger.error(f"Failed to load the model or the tokenizer: {e}")
+            raise
 
     def load_model(self):
         if not self.model or not self.tokenizer:
@@ -82,7 +84,7 @@ class Inference:
                     self.model_id,
                     quantization_config=bnb_config
                 ).to(self.device)
-                
+
                 if self.distributed:
                     self.model = DDP(self.model)
             except Exception as error:
