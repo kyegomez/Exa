@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from transformers import AutoModelForCausalLM, BitsAndBytesConfig
+from transformers import AutoModelForCausalLM
 from exa.quant.main import Quantize
 
 class TestQuantize(unittest.TestCase):

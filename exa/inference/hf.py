@@ -79,7 +79,11 @@ class Inference:
         if not self.model or not self.tokenizer:
             try:
                 self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
-                bnb_config = BitsAndBytesConfig(**self.quantization_config) if self.quantization_config else None
+
+                bnb_config = BitsAndBytesConfig(
+                    **self.quantization_config
+                ) if self.quantization_config else None
+
                 self.model = AutoModelForCausalLM.from_pretrained(
                     self.model_id,
                     quantization_config=bnb_config
@@ -128,7 +132,7 @@ class Inference:
                         output_tokens = outputs[0][-1]
                         output_sequence.append(output_tokens.item())
 
-                        #print tken in real-time
+                        #print token in real-time
                         print(self.tokenizer.decode(
                             [output_tokens], 
                             skip_special_tokens=True), 

@@ -31,8 +31,8 @@ class TestGPTQInference(unittest.TestCase):
             quantization_config_dataset='wiki', 
             max_length=100
         )
-        self.assertTrue(inferer.verbose == False)
-        self.assertTrue(inferer.distributed == False)
+        self.assertTrue(inferer.verbose is False)
+        self.assertTrue(inferer.distributed is False)
         self.mocked_from_pretrained_tokenizer.assert_called_once()
         self.mocked_from_pretrained_model.assert_called_once()
 
@@ -55,7 +55,7 @@ class TestGPTQInference(unittest.TestCase):
             max_length=100,
             distributed=True
         )
-        self.assertTrue(inferer.distributed == True)
+        self.assertTrue(inferer.distributed is True)
 
     def test_run(self):
         inferer = GPTQInference(
