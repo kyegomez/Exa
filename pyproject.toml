@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "exxa"
-version = "0.0.7"
+version = "0.0.8"
 description = "Exa - Pytorch"
 license = "MIT"
 authors = ["Kye Gomez <kye@apac.ai>"]
@@ -32,6 +32,7 @@ transformers = "*"
 shapeless = "*"
 bitsandbytes = "*"
 optimum = "*" 
+accelerate = "*"
 
 
 
