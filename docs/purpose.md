@@ -1,47 +1,39 @@
-# Zeta's Purpose
+**Exa: Revolutionizing Consumer GPU Performance**
 
+**Description: What is it?**
+Exa is a groundbreaking inference library engineered to run exascale LLMs locally, harnessing the full potential of today's consumer-grade GPUs. With Exa, we bring enterprise-level processing power into the hands of the everyday user.
 
-Eevery once in a while, a revolutionary project comes along that changes everything.
+**Problem: What problem is this solving?**
+The divide between the computational needs of advanced LLMs and the capabilities of common consumer GPUs is growing. Exascale models usually require high-end, expensive hardware setups, which are out of reach for many developers and small businesses.
 
-A landscape cluttered by rigid frameworks, plagued by inefficiencies, and where developers - our brightest minds - are bogged down by limitations.
+**Why: How do we know this is a real problem and worth solving?**
+As we enter the age of AI, models are growing in complexity, and the need to utilize them effectively has become paramount. Not everyone has access to supercomputers or cloud-based solutions. There's an increasing demand for localized, efficient, and cost-effective solutions to run these models. That's where Exa steps in.
 
-Now, imagine a world where harnessing the power of state-of-the-art models isn't just possible... it's simple. A world where efficiency doesn’t sacrifice safety, and where your ideas are bounded only by your imagination. We should be living in this world. But we aren't.
+**Success: How do we know if we’ve solved this problem?**
+When developers, regardless of their hardware setup, can run exascale LLMs seamlessly and efficiently without compromising on performance or accuracy, we'll know we've bridged the gap. Feedback from our community and measurable improvements in GPU performance metrics will be our indicators.
 
+**Audience: Who are we building for?**
+We're building Exa for a broad audience:
 
-Because Zeta is what's missing.
+- AI researchers who wish to run heavy models without hefty infrastructure.
+- Developers looking for plug-and-play solutions for their applications.
+- Small businesses that can't afford high-end GPU clusters.
+- Enthusiasts and students who wish to experiment with the power of LLMs on their personal machines.
 
+**What: Roughly, what does this look like in the product?**
+A streamlined Python library, easily installed via pip, with a minimalistic interface. Users can initiate models, run inferences, quantize, and more with just a few lines of code. The underlying optimizations, although complex, are masked by the library's simplicity, staying true to our principle of "Radical Simplicity".
 
-The challenge? Creating a framework that's not just another tool, but a revolution.
+**How: What is the experiment plan?**
+- **Alpha Testing**: Start with internal testing amongst our team.
+- **Beta Release**: Release to a select group of developers and gather feedback.
+- **Optimization Phase**: Using the feedback, optimize for performance and usability.
+- **Official Release**: Launch Exa to the public.
+- **Continuous Feedback Loop**: Maintain a constant feedback loop with the community for improvements.
 
-To bridge this gap, one would need to optimize at the foundational level, prioritize user experience, and introduce a design philosophy that future-proofs. It's colossal. And until now, no one's even come close.
+**When: When does it ship and what are the milestones?**
+- **Alpha Testing**: 1 month from now.
+- **Beta Release**: 3 months from now.
+- **Optimization Phase**: 4-5 months from the project's start date.
+- **Official Release**: 6 months from today.
 
-
-But there’s an enormous opportunity here. An opportunity that promises not just recognition but the power to redefine an industry. And, the key to unlocking this future? It's been with us all along.
-
-
-Insight.
-
-
-Introducing... Zeta.
-
-
-Our secret? Fluidity.
-
-It’s a philosophy that values modularity, reliability, usability, and unmatched speed. 
-
-But more than that, it's a commitment to evolution, to pushing boundaries, to never settling.
-
-
-Why are we the best to execute this vision? 
-
-Because we've been there from the start. 
-
-We've seen the challenges, felt the frustrations, and now, we're poised to lead the revolution. 
-
-We’ve done it before, and with Zeta, we’re doing it again.
-
-
-Zeta isn’t just the next step. It's a leap into the future.
-
-Zeta is the future of AI.
-
+Together, with Exa, we're not just optimizing code; we're optimizing dreams, ambitions, and the future of AI. Let's make exascale models accessible to everyone.
