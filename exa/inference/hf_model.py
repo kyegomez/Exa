@@ -26,6 +26,7 @@ class Inference:
             verbose = False,
             # logger=None,
             distributed=False,
+            decoding=False
         ):
         """
         Initialize the Inference object.
@@ -45,6 +46,7 @@ class Inference:
         self.max_length = max_length
         self.verbose = verbose
         self.distributed = distributed
+        self.decoding = decoding
         self.model, self.tokenizer = None, None
         
 
@@ -91,26 +93,6 @@ class Inference:
                 self.logger.error(f"Failed to load the model or the tokenizer: {error}")
                 raise
 
-    def __call__(
-            self, 
-            prompt_text: str, 
-            max_length: int = None
-        ):
-
-        max_length = max_length if max_length else self.max_length
-        try:
-            inputs = self.tokenizer.encode(
-                prompt_text, 
-                return_tensors="pt"
-            ).to(self.device)
-            with torch.no_grad():
-                outputs = self.model.generate(inputs, max_length=max_length, do_sample=True)
-            return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-        except Exception as e:
-            self.logger.error(f"Failed to generate the text: {e}")
-            raise
-
-
     def run(
             self, 
             prompt_text: str, 
@@ -135,13 +117,35 @@ class Inference:
                 return_tensors="pt"
             ).to(self.device)
 
-            with torch.no_grad():
-                outputs = self.model.generate(
-                    inputs, 
-                    max_length=max_length, 
-                    do_sample=True
-                )
-            
+            if self.decoding:
+                with torch.no_grad():
+                    for _ in range(max_length):
+                        output_sequence = []
+
+                        outputs = self.model.generate(
+                            inputs,
+                            max_length=len(inputs) + 1, 
+                            do_sample=True
+                        )
+                        output_tokens = outputs[0][-1]
+                        output_sequence.append(output_tokens.item())
+
+                        #print tken in real-time
+                        print(self.tokenizer.decode(
+                            [output_tokens], 
+                            skip_special_tokens=True), 
+                            end="",
+                            flush=True
+                        )
+                        inputs = outputs
+            else:
+                with torch.no_grad():
+                    outputs = self.model.generate(
+                        inputs, 
+                        max_length=max_length, 
+                        do_sample=True
+                    )
+                
             del inputs
 
             return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
