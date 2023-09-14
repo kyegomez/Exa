@@ -125,6 +125,25 @@ We're excited about the journey ahead and would love to have you with us! For fe
 
 ------
 
+# Benchmarks
+The following is what we benchmark for according to the [🤗 LLM-Perf Leaderboard 🏋️ benchmarks](https://huggingface.co/spaces/optimum/llm-perf-leaderboard)
+
+
+- https://huggingface.co/spaces/optimum/llm-perf-leaderboard
+- https://github.com/huggingface/optimum-benchmark
+
+## Metrics 
+- Backend 🏭
+- Dtype 📥
+- Optimizations 🛠️
+- Quantization 🗜️
+- Class 🏋️
+- Type 🤗
+- Memory (MB) ⬇️
+- Throughput (tokens/s) ⬆️
+- Energy (tokens/kWh) ⬇️
+- Best Score (%) ⬆️
+- Best Scored LLM 🏆
 
 # License
 MIT

@@ -51,6 +51,7 @@ Together, with Exa, we're not just optimizing code; we're optimizing dreams, amb
 
 3. **Unleash the full potential of exascale LLMs on consumer-class GPUs, proven by extensive benchmarks, with no long-term adjustments and minimal learning curve.**
 
+----
 
 # Features
 Given the detailed code documentation you provided, I can extract an extensive list of features for each of the mentioned classes: `Quantize`, `GPTQInference`, and `Inference`, using the value proposition formula. I'll break down the features of each class accordingly:
