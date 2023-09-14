@@ -72,7 +72,7 @@ class Inference:
                 quantization_config=bnb_config
             )
             
-            self.model.to(self.device)
+            self.model#.to(self.device)
         except Exception as e:
             self.logger.error(f"Failed to load the model or the tokenizer: {e}")
             raise
