@@ -62,15 +62,18 @@ Efficiently generate text using quantized GPT-like models built for HuggingFace'
 
 ```python
 
+# !pip install exxa
 from exa import GPTQInference
 
-model_id = "facebook/opt-125m"
-model = GPTQInference(model_id=model_id, max_length=400)
-
-prompt = "in a land far far away"
-result = model.run(prompt)
-print(result)
-
+model_id = "gpt2-medium"
+inference = GPTQInference(
+    model_id, 
+    quantization_config_bits=2, 
+    max_length=400, 
+    quantization_config_dataset='c4'
+)
+output_text = inference.run("The future of AI is")
+print(output_text)
 ```
 
 ## Quantize
