@@ -37,7 +37,7 @@ class GPTQInference:
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
         self.quantization_config = GPTQConfig(
             bits=self.quantization_config_bits,
-            dataset=quantization_config_dataset,
+            # dataset=quantization_config_dataset,
             tokenizer=self.tokenizer
         )
 
