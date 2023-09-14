@@ -1,7 +1,7 @@
 import logging
 import time
-from transformers import AutoModelForCasualLM, AutoTokenizer, BitsAndBytesConfig
-from transformers.errors import HuggingFaceError
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+
 
 class Quantize:
     """
@@ -102,7 +102,7 @@ class Quantize:
             start_time = time.time()
 
             #load the quantized model
-            self.model = AutoModelForCasualLM.from_pretrained(
+            self.model = AutoModelForCausalLM.from_pretrained(
                 self.model_id,
                 device_map=device_map,
                 quantization_config=quantization_config,
@@ -120,7 +120,7 @@ class Quantize:
             }
 
             self.log_metadata(metadata)
-        except HuggingFaceError as error:
+        except RuntimeError as error:
             self.logger.error(f"An error occured while loading the model: {error} please understand the root cause then look at documentation for common errors")
     
     def push_to_hub(self, hub):
@@ -138,7 +138,7 @@ class Quantize:
                 self.tokenizer.push_to_hub(hub)
             else:
                 raise ValueError("Model and tokenizer must be loaded before pushing to the hub")
-        except HuggingFaceError as error:
+        except RuntimeError as error:
             self.logger.error(f"An error occured while pushing to the hub: {error}")
     
     def load_from_hub(self, hub):
@@ -152,10 +152,10 @@ class Quantize:
 
             #load a quantized model from the hub
             if self.tokenizer is not None:
-                self.model = AutoModelForCasualLM.from_pretrained(hub, device_map="auto")
+                self.model = AutoModelForCausalLM.from_pretrained(hub, device_map="auto")
             else:
                 raise ValueError("Tokenizer must be loaded from loading the hub model")
-        except HuggingFaceError as error:
+        except RuntimeError as error:
             self.logger.error(f'An error occured while loading from the hub: {error}')
 
 

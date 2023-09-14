@@ -1,8 +1,6 @@
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, GPTQConfig
-from shapeless import shapeless
 
-@shapeless
 class GPTQInference:
     def __init__(
         self,

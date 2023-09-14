@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "exxa"
-version = "0.0.1"
+version = "0.0.7"
 description = "Exa - Pytorch"
 license = "MIT"
 authors = ["Kye Gomez <kye@apac.ai>"]
@@ -30,6 +30,9 @@ packages = [
 python = "^3.6"
 transformers = "*"
 shapeless = "*"
+bitsandbytes = "*"
+optimum = "*" 
+
 
 
 [tool.poetry.dev-dependencies]
