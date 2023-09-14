@@ -14,14 +14,14 @@ class GPTQInference:
         self,
         model_id,
         quantization_config_bits,
-        quantization_config_dataset,
+        # quantization_config_dataset,
         max_length,
         verbose = False,
         distributed = False,
     ):
         self.model_id = model_id
         self.quantization_config_bits = quantization_config_bits
-        self.quantization_config_dataset = quantization_config_dataset
+        # self.quantization_config_dataset = quantization_config_dataset
         self.max_length = max_length
         self.verbose = verbose
         self.distributed = distributed

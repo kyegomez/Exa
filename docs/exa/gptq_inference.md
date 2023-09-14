@@ -66,7 +66,7 @@ Note: In the case of any exceptions during the generation, an error message is p
 ### Example 1: Basic Usage
 
 ```python
-from zeta import GPTQInference
+from exa import GPTQInference
 
 model_id = "gpt2-medium"
 inference_engine = GPTQInference(model_id)
@@ -77,7 +77,7 @@ print(output_text)
 ### Example 2: Using Custom Quantization Bits
 
 ```python
-from zeta import GPTQInference
+from exa import GPTQInference
 
 model_id = "gpt2-medium"
 inference_engine = GPTQInference(model_id, quantization_config_bits=2)
