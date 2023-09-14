@@ -46,6 +46,8 @@ class Quantize:
         self.quant_type = quant_type
         self.use_double_quant = use_double_quant
 
+        self.verbose = verbose
+
         self.tokenizer = None
         self.model = None
         self.logger = self._init_logger()
@@ -96,7 +98,7 @@ class Quantize:
                 llm_int8_has_fp16_weight = self.has_fp16_weight,
                 bnb_4bit_compute_dtype=self.compute_dtype,
                 bnb_4bit_quant_type=self.quant_type,
-                bnb_4bit_use_double_quant=self.use_doubkle_quant,   
+                bnb_4bit_use_double_quant=self.use_double_quant,   
             )
 
             start_time = time.time()
