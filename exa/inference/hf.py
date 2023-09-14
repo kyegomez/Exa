@@ -4,8 +4,6 @@ import torch
 from torch.nn.parallel import DistributedDataParallel as DDP
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
-# from exa.utils.custom_formatter import ColoredLogger, logger
-
 
 class Inference:
     """
