@@ -129,5 +129,10 @@ We're excited about the journey ahead and would love to have you with us! For fe
 # License
 MIT
 
+# Todo
+
+- Setup utils logger classes for metric logging with useful metadata such as token inference per second, latency, memory consumption
+- Add cuda c++ extensions for radically optimized classes for high performance quantization + inference on the edge
+
 
 
