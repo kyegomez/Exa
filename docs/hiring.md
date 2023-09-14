@@ -2,11 +2,11 @@
 
 ### **The Next Chapter of Humanity's Story Begins Here...**
 
-At Zeta, our mission transcends mere technological advancement. We envision a world where every individual can leverage the power of AI to uplift their lives, communities, and our shared future. If you are driven by the passion to revolutionize industries, to scale the heights of innovation, and believe in earning your fair share for every ounce of your dedication – you might be the one we're looking for.
+At Exa, our mission transcends mere technological advancement. We envision a world where every individual can leverage the power of AI to uplift their lives, communities, and our shared future. If you are driven by the passion to revolutionize industries, to scale the heights of innovation, and believe in earning your fair share for every ounce of your dedication – you might be the one we're looking for.
 
 ---
 
-### **Why Zeta?** 
+### **Why Exa?** 
 
 #### **For the Ambitious Spirit**:
 - **Opportunity Beyond Boundaries**: Just as Fuller believed in the infinite opportunities of America, we believe in the limitless potential of raw Humantiy.
@@ -21,14 +21,14 @@ At Zeta, our mission transcends mere technological advancement. We envision a wo
 - **Rewarding Compensation**: While the sky is the limit for your innovations, so is your earning potential. Prosper with performance-based rewards that reflect your dedication.
 
 #### **For the Community Builder**:
-- **Culture of Unity & Innovation**: At Zeta, you’re not just an employee; you’re a pivotal part of our mission. Experience camaraderie, collaboration, and a shared purpose that binds us together.
+- **Culture of Unity & Innovation**: At Exa, you’re not just an employee; you’re a pivotal part of our mission. Experience camaraderie, collaboration, and a shared purpose that binds us together.
 
 #### **For the Visionary**:
 - **Work on the Cutting-Edge**: Be at the forefront of AI and technology. Shape solutions that will define the next era of human history.
 
 ---
 
-### **Benefits of Joining Zeta**:
+### **Benefits of Joining Exa**:
 
 1. **Advance Humanity**: Play an instrumental role in democratizing technology for all.
 2. **Financial Prosperity**: Harness a compensation structure that grows with your achievements.
@@ -51,7 +51,7 @@ At Zeta, our mission transcends mere technological advancement. We envision a wo
 ### **Your Invitation to the Future**:
 If you resonate with our vision of blending technological marvels with human brilliance, of creating a prosperous world where every dream has the wings of AI – we invite you to join us on this extraordinary journey.
 
-**Are you ready to create history with Zeta?**
+**Are you ready to create history with Exa?**
 
 ---
 

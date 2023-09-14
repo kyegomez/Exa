@@ -1,11 +1,11 @@
-## **Zeta in Marketing Agencies: A New Era of Automated Media Strategy**
+## **Exa in Marketing Agencies: A New Era of Automated Media Strategy**
 
 ---
 
 ### **Introduction**: 
 - Brief background on marketing agencies and their role in driving brand narratives and sales.
 - Current challenges and pain points faced in media planning, placements, and budgeting.
-- Introduction to the transformative potential of zeta in reshaping the marketing industry.
+- Introduction to the transformative potential of Exa in reshaping the marketing industry.
 
 ---
 
@@ -14,9 +14,9 @@
    
    - **Traditional Solutions and Their Shortcomings**: Manual brainstorming sessions, over-reliance on past strategies, and long turnaround times leading to inefficiency.
    
-   - **How Zeta Address This Problem**: 
-      - **Benefit 1**: Automated Media Plan Generation – Zeta ingest branding summaries, objectives, and marketing strategies to generate media plans, eliminating guesswork and human error.
-      - **Real-world Application of Zeta**: The automation of media plans based on client briefs, including platform selections, audience targeting, and creative versions.
+   - **How Exa Address This Problem**: 
+      - **Benefit 1**: Automated Media Plan Generation – Exa ingest branding summaries, objectives, and marketing strategies to generate media plans, eliminating guesswork and human error.
+      - **Real-world Application of Exa**: The automation of media plans based on client briefs, including platform selections, audience targeting, and creative versions.
 
 ---
 
@@ -25,9 +25,9 @@
    
    - **Traditional Solutions and Their Shortcomings**: Manual placement leading to possible misalignment with target audiences and brand objectives.
    
-   - **How Zeta Address This Problem**: 
-      - **Benefit 2**: Precision Media Placements – Zeta analyze audience data and demographics to suggest the best placements, optimizing for conversions and brand reach.
-      - **Real-world Application of Zeta**: Automated selection of ad placements across platforms like Facebook, Google, and DSPs based on media plans.
+   - **How Exa Address This Problem**: 
+      - **Benefit 2**: Precision Media Placements – Exa analyze audience data and demographics to suggest the best placements, optimizing for conversions and brand reach.
+      - **Real-world Application of Exa**: Automated selection of ad placements across platforms like Facebook, Google, and DSPs based on media plans.
 
 ---
 
@@ -36,9 +36,9 @@
    
    - **Traditional Solutions and Their Shortcomings**: Manual budgeting using tools like Excel, prone to errors, and inefficient shifts in allocations.
    
-   - **How Zeta Address This Problem**: 
-      - **Benefit 3**: Intelligent Media Budgeting – Zeta enable dynamic budget allocation based on performance analytics, maximizing ROI.
-      - **Real-world Application of Zeta**: Real-time adjustments in budget allocations based on campaign performance, eliminating long waiting periods and manual recalculations.
+   - **How Exa Address This Problem**: 
+      - **Benefit 3**: Intelligent Media Budgeting – Exa enable dynamic budget allocation based on performance analytics, maximizing ROI.
+      - **Real-world Application of Exa**: Real-time adjustments in budget allocations based on campaign performance, eliminating long waiting periods and manual recalculations.
 
 ---
 
@@ -52,13 +52,13 @@
 ---
 
 ### **Testimonials**:
-- "Zeta have completely revolutionized our media planning process. What used to take weeks now takes mere hours." - *Senior Media Strategist, Top-tier Marketing Agency*
+- "Exa have completely revolutionized our media planning process. What used to take weeks now takes mere hours." - *Senior Media Strategist, Top-tier Marketing Agency*
 - "The precision with which we can place ads now is unprecedented. It's like having a crystal ball for marketing!" - *Campaign Manager, Global Advertising Firm*
 
 ---
 
 ### **Conclusion**: 
-- Reiterate the immense potential of zeta in revolutionizing media planning, placements, and budgeting for marketing agencies.
-- Call to action: For marketing agencies looking to step into the future and leave manual inefficiencies behind, zeta are the answer.
+- Reiterate the immense potential of Exa in revolutionizing media planning, placements, and budgeting for marketing agencies.
+- Call to action: For marketing agencies looking to step into the future and leave manual inefficiencies behind, Exa are the answer.
 
 ---

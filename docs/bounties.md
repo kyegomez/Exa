@@ -1,6 +1,6 @@
 # Bounty Program
 
-Our bounty program is an exciting opportunity for contributors to help us build the future of Zeta. By participating, you can earn rewards while contributing to a project that aims to revolutionize digital activity.
+Our bounty program is an exciting opportunity for contributors to help us build the future of Exa. By participating, you can earn rewards while contributing to a project that aims to revolutionize digital activity.
 
 Here's how it works:
 
@@ -10,24 +10,24 @@ Here's how it works:
 
 3. **Get to Work**: Once you've chosen a task, start working on it. Remember, quality is key. We're looking for contributions that truly make a difference.
 
-4. **Submit your Contribution**: Once your work is complete, submit it for review. We'll evaluate your contribution based on its quality, relevance, and the value it brings to Zeta.
+4. **Submit your Contribution**: Once your work is complete, submit it for review. We'll evaluate your contribution based on its quality, relevance, and the value it brings to Exa.
 
-5. **Earn Rewards**: If your contribution is approved, you'll earn a bounty. The amount of the bounty depends on the complexity of the task, the quality of your work, and the value it brings to Zeta.
+5. **Earn Rewards**: If your contribution is approved, you'll earn a bounty. The amount of the bounty depends on the complexity of the task, the quality of your work, and the value it brings to Exa.
 
 ## The Three Phases of Our Bounty Program
 
 ### Phase 1: Building the Foundation
-In the first phase, our focus is on building the basic infrastructure of Zeta. This includes developing key components like the Zeta class, integrating essential tools, and establishing task completion and evaluation logic. We'll also start developing our testing and evaluation framework during this phase. If you're interested in foundational work and have a knack for building robust, scalable systems, this phase is for you.
+In the first phase, our focus is on building the basic infrastructure of Exa. This includes developing key components like the Exa class, integrating essential tools, and establishing task completion and evaluation logic. We'll also start developing our testing and evaluation framework during this phase. If you're interested in foundational work and have a knack for building robust, scalable systems, this phase is for you.
 
 ### Phase 2: Enhancing the System
-In the second phase, we'll focus on enhancing Zeta by integrating more advanced features, improving the system's efficiency, and refining our testing and evaluation framework. This phase involves more complex tasks, so if you enjoy tackling challenging problems and contributing to the development of innovative features, this is the phase for you.
+In the second phase, we'll focus on enhancing Exa by integrating more advanced features, improving the system's efficiency, and refining our testing and evaluation framework. This phase involves more complex tasks, so if you enjoy tackling challenging problems and contributing to the development of innovative features, this is the phase for you.
 
 ### Phase 3: Towards Super-Intelligence
 The third phase of our bounty program is the most exciting - this is where we aim to achieve super-intelligence. In this phase, we'll be working on improving the swarm's capabilities, expanding its skills, and fine-tuning the system based on real-world testing and feedback. If you're excited about the future of AI and want to contribute to a project that could potentially transform the digital world, this is the phase for you.
 
-Remember, our roadmap is a guide, and we encourage you to bring your own ideas and creativity to the table. We believe that every contribution, no matter how small, can make a difference. So join us on this exciting journey and help us create the future of Zeta.
+Remember, our roadmap is a guide, and we encourage you to bring your own ideas and creativity to the table. We believe that every contribution, no matter how small, can make a difference. So join us on this exciting journey and help us create the future of Exa.
 
-**To participate in our bounty program, visit the [Zeta Bounty Program Page](https://ft.apac.ai/bounty).** Let's build the future together!
+**To participate in our bounty program, visit the [Exa Bounty Program Page](https://ft.apac.ai/bounty).** Let's build the future together!
 
 
 
@@ -35,11 +35,11 @@ Remember, our roadmap is a guide, and we encourage you to bring your own ideas a
 
 ## Bounties for Roadmap Items
 
-To accelerate the development of Zeta and to encourage more contributors to join our journey towards automating every digital activity in existence, we are announcing a Bounty Program for specific roadmap items. Each bounty will be rewarded based on the complexity and importance of the task. Below are the items available for bounty:
+To accelerate the development of Exa and to encourage more contributors to join our journey towards automating every digital activity in existence, we are announcing a Bounty Program for specific roadmap items. Each bounty will be rewarded based on the complexity and importance of the task. Below are the items available for bounty:
 
 1. **Multi-Agent Debate Integration**: $2000
 2. **Meta Prompting Integration**: $1500
-3. **Zeta Class**: $1500
+3. **Exa Class**: $1500
 4. **Integration of Additional Tools**: $1000
 5. **Task Completion and Evaluation Logic**: $2000
 6. **Ocean Integration**: $2500
