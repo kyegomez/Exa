@@ -35,9 +35,9 @@ class Quantize:
         verbose=False,
     ):
         super().__init__()
-        self.model_id
+        self.model_id = model_id
 
-        self.bits
+        self.bits = bits
         self.threshold = threshold
         self.skip_modules = skip_modules
         self.enable_fp32_cpu_offload = enable_fp32_cpu_offload
