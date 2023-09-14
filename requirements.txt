@@ -2,6 +2,7 @@ transformers
 bitsandbytes
 accelerate
 optimum
+auto-gptq
 
 mkdocs
 mkdocs-material
