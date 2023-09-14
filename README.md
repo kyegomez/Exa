@@ -1,11 +1,13 @@
 [![Multi-Modality](agorabanner.png)](https://discord.gg/qUtxnK2NMf)
 
 # Exa
-Ultra-optimized fast inference library for running exascale LLMs locally on modern consumer-class GPUs.
+Boost your GPU's LLM performance by 300% on everyday GPU hardware, as validated by renowned developers, in just 5 minutes of setup and with no additional hardware costs.
+
+-----
 
 ## Principles
-- Radical Simplicity (Utilizing super-powerful LLMs with as minimal code as possible)
-- Ultra-Optimizated (High Performance classes that extract all the power from these LLMs)
+- Radical Simplicity (Utilizing super-powerful LLMs with as minimal lines of code as possible)
+- Ultra-Optimizated Peformance (High Performance code that extract all the power from these LLMs)
 - Fludity & Shapelessness (Plug in and play and re-architecture as you please)
 
 ---
@@ -28,6 +30,15 @@ pip install exxa
 # Usage
 
 ## Inference
+Generate text using pretrained models with optional quantization with minimal configuration and straightforward usage.
+
+- Load specified pre-trained models with device flexibility (CPU/CUDA).
+- Set a default maximum length for the generated sequences.
+- Choose to quantize model weights for faster inference.
+- Use a custom configuration for quantization as needed.
+- Generate text through either a direct call or the run method.
+- Simple usage for quick text generation based on provided prompts.
+
 ```python
 from exa import Inference
 
@@ -41,6 +52,13 @@ model.run("What is your name")
 
 
 ## GPTQ Inference
+Efficiently generate text using quantized GPT-like models built for HuggingFace's pre-trained models with optional quantization and only a few lines of code for instantiation and generation.
+
+- Load specified pre-trained models with an option for quantization.
+- Define custom bit depth for the quantization (default is 4 bits).
+- Fine-tune quantization parameters using specific datasets.
+- Set maximum length for generated sequences to maintain consistency.
+- Tokenize prompts and generate text based on them seamlessly.
 
 ```python
 
@@ -56,6 +74,19 @@ print(result)
 ```
 
 ## Quantize
+Achieve smaller model sizes and faster inference by utilizing a unified interface tailored to HuggingFace's framework and only a simple class instantiation with multiple parameters is needed.
+- Efficiently quantize HuggingFace's pretrained models with specified bits (default is 4 bits).
+- Set custom thresholds for quantization for precision management.
+- Ability to skip specific modules during quantization for sensitive model parts.
+- Offload parts of the model to CPU in FP32 format for GPU memory management.
+- Specify if model weights are already in FP16 format.
+- Choose from multiple quantization types like "fp4", "int8", and more.
+- Option to enable double quantization for more compression.
+- Verbose logging for a detailed understanding of the quantization process.
+- Seamlessly push to and load models from the HuggingFace model hub.
+- In-built logger initialization tailored for quantization logs.
+- Log metadata for state and settings introspection.
+
 
 ```python
 from exa import Quantize
