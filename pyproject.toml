@@ -32,6 +32,7 @@ transformers = "*"
 bitsandbytes = "*"
 optimum = "*" 
 accelerate = "*"
+termcolor = "*"
 
 
 

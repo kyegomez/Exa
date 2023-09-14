@@ -1,6 +1,6 @@
 import logging
 import time
-from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+from transformers import AutoModelForCausalLM, BitsAndBytesConfig
 
 
 class Quantize:
