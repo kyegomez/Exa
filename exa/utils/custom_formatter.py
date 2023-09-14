@@ -48,6 +48,8 @@ class CustomFormatter(logging.Formatter):
         format_dict = self.format_mappings.get(record.levelno)
         log_message = super().format(record)
         return colored(log_message, format_dict["color"])
+    
+    
 
 class ColoredLogger:
     """
