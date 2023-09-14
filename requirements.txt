@@ -1,5 +1,8 @@
+transformers
+bitsandbytes
+accelerate
+optimum
+
 mkdocs
 mkdocs-material
 mkdocs-glightbox
-shapeless
-transformers
