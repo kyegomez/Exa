@@ -49,7 +49,7 @@ model = Inference(
 
 model.run("What is your name")
 ```
-
+---
 
 ## GPTQ Inference
 Efficiently generate text using quantized GPT-like models built for HuggingFace's pre-trained models with optional quantization and only a few lines of code for instantiation and generation.
@@ -61,7 +61,6 @@ Efficiently generate text using quantized GPT-like models built for HuggingFace'
 - Tokenize prompts and generate text based on them seamlessly.
 
 ```python
-
 # !pip install exxa
 from exa import GPTQInference
 
@@ -75,6 +74,7 @@ inference = GPTQInference(
 output_text = inference.run("The future of AI is")
 print(output_text)
 ```
+---
 
 ## Quantize
 Achieve smaller model sizes and faster inference by utilizing a unified interface tailored to HuggingFace's framework and only a simple class instantiation with multiple parameters is needed.
