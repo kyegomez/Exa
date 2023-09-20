@@ -17,6 +17,18 @@ class Inference:
         quantization_config (dict, optional): The configuration for quantization.
         verbose (bool, optional): Whether to print verbose logs. Defaults to False.
         logger (logging.Logger, optional): The logger to use. Defaults to a basic logger.
+    
+    # Usage
+    ```
+    from finetuning_suite import Inference
+
+    model_id = "gpt2-small"
+    inference = Inference(model_id=model_id)
+
+    prompt_text = "Once upon a time"
+    generated_text = inference(prompt_text)
+    print(generated_text)
+    ```
     """
     def __init__(
             self, 
