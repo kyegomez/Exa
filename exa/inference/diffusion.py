@@ -59,7 +59,3 @@ class Diffuse:
                 )
         except RuntimeError as error:
             print(f"Could not run inference on torch setup: {error}")
-
-prompts = ["a dog", " cat"]
-infer = Diffuse(method="accelerate")
-infer.run(prompts)
