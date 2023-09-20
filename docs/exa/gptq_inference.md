@@ -70,7 +70,7 @@ from exa import GPTQInference
 
 model_id = "gpt2-medium"
 inference_engine = GPTQInference(model_id)
-output_text = inference_engine.generate("Once upon a time")
+output_text = inference_engine.run("Once upon a time")
 print(output_text)
 ```
 
@@ -81,7 +81,7 @@ from exa import GPTQInference
 
 model_id = "gpt2-medium"
 inference_engine = GPTQInference(model_id, quantization_config_bits=2)
-output_text = inference_engine.generate("The future of AI is")
+output_text = inference_engine.run("The future of AI is")
 print(output_text)
 ```
 
@@ -92,7 +92,7 @@ from exa import GPTQInference
 
 model_id = "gpt2-medium"
 inference_engine = GPTQInference(model_id, quantization_config_dataset="my_dataset")
-output_text = inference_engine.generate("The beauty of nature is")
+output_text = inference_engine.run("The beauty of nature is")
 print(output_text)
 ```
 
