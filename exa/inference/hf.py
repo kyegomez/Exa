@@ -13,6 +13,10 @@ class Inference:
         model_id (str): The ID of the model.
         device (str): The device to run the model on (either 'cuda' or 'cpu').
         max_length (int): The maximum length of the output sequence.
+        quantize (bool, optional): Whether to use quantization. Defaults to False.
+        quantization_config (dict, optional): The configuration for quantization.
+        verbose (bool, optional): Whether to print verbose logs. Defaults to False.
+        logger (logging.Logger, optional): The logger to use. Defaults to a basic logger.
     """
     def __init__(
             self, 
@@ -26,18 +30,6 @@ class Inference:
             distributed=False,
             decoding=False
         ):
-        """
-        Initialize the Inference object.
-        
-        Args:
-            model_id (str): The ID of the model.
-            device (str, optional): The device to run the model on. Defaults to 'cuda' if available.
-            max_length (int, optional): The maximum length of the output sequence. Defaults to 20.
-            quantize (bool, optional): Whether to use quantization. Defaults to False.
-            quantization_config (dict, optional): The configuration for quantization.
-            verbose (bool, optional): Whether to print verbose logs. Defaults to False.
-            logger (logging.Logger, optional): The logger to use. Defaults to a basic logger.
-        """
         self.logger = logging.getLogger(__name__)
         self.device = device if device else ('cuda' if torch.cuda.is_available() else 'cpu')
         self.model_id = model_id

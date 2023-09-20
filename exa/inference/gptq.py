@@ -10,6 +10,30 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class GPTQInference:
+    """
+    GPT-Q Inference class.
+
+    Args:
+        model_id (str): The identifier of the pre-trained model.
+        quantization_config_bits (int): The number of bits for quantization.
+        quantization_config_dataset (str): The dataset used for quantization.
+        max_length (int): The maximum length of the generated output.
+        verbose (bool, optional): Whether to enable verbose mode. Default is False.
+        distributed (bool, optional): Whether to enable distributed processing. Default is False.
+
+    Attributes:
+        model_id (str): The identifier of the pre-trained model.
+        quantization_config_bits (int): The number of bits for quantization.
+        quantization_config_dataset (str): The dataset used for quantization.
+        max_length (int): The maximum length of the generated output.
+        verbose (bool): Whether verbose mode is enabled.
+        distributed (bool): Whether distributed processing is enabled.
+        device (torch.device): The device to be used for inference.
+        tokenizer (AutoTokenizer): The tokenizer for the model.
+        quantization_config (GPTQConfig): The quantization configuration for the model.
+        model (AutoModelForCausalLM): The pre-trained model for inference.
+
+    """
     def __init__(
         self,
         model_id,
@@ -61,6 +85,20 @@ class GPTQInference:
             prompt: str,
             max_length: int = 500,
         ):
+        """
+        Run the GPT-Q inference.
+
+        Args:
+            prompt (str): The input prompt for generating the output.
+            max_length (int, optional): The maximum length of the generated output. Default is 500.
+
+        Returns:
+            str: The generated output.
+
+        Raises:
+            Exception: If there is an error in the inference mode.
+
+        """
         max_length = self.max_length or max_length
         
         try:
