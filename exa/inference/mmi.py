@@ -3,7 +3,41 @@ from transformers import IdeficsForVisionText2Text, AutoProcessor
 
 class MultiModalInference:
     """
-    
+
+    A class for multimodal inference using pre-trained models from the Hugging Face Hub.
+
+    Attributes
+    ----------
+    device : str
+        The device to use for inference.
+    checkpoint : str, optional
+        The name of the pre-trained model checkpoint (default is "HuggingFaceM4/idefics-9b-instruct").
+    processor : transformers.PreTrainedProcessor
+        The pre-trained processor.
+    max_length : int
+        The maximum length of the generated text.
+    chat_history : list
+        The chat history.
+
+    Methods
+    -------
+    infer(prompts, batched_mode=True)
+        Generates text based on the provided prompts.
+    chat(user_input)
+        Engages in a continuous bidirectional conversation based on the user input.
+    set_checkpoint(checkpoint)
+        Changes the model checkpoint.
+    set_device(device)
+        Changes the device used for inference.
+    set_max_length(max_length)
+        Changes the maximum length of the generated text.
+    clear_chat_history()
+        Clears the chat history.
+
+
+    # Usage
+    ```
+    from exa import MultiModalInference
     mmi = MultiModalInference()
 
     user_input = "User: What is in this image? https://upload.wikimedia.org/wikipedia/commons/8/86/Id%C3%A9fix.JPG"
@@ -18,6 +52,7 @@ class MultiModalInference:
     mmi.set_device("cpu")
     mmi.set_max_length(200)
     mmi.clear_chat_history()
+    ```
 
     """
     def __init__(
@@ -46,6 +81,21 @@ class MultiModalInference:
         prompts,
         batched_mode=True
     ):
+        """
+        Generates text based on the provided prompts.
+
+        Parameters
+        ----------
+            prompts : list
+                A list of prompts. Each prompt is a list of text strings and images.
+            batched_mode : bool, optional
+                Whether to process the prompts in batched mode. If True, all prompts are processed together. If False, only the first prompt is processed (default is True).
+
+        Returns
+        -------
+            list
+                A list of generated text strings.
+        """
         inputs = self.processor(
             prompts,
             add_end_of_utterance_token=False,
@@ -83,6 +133,19 @@ class MultiModalInference:
         return generated_text
     
     def chat(self, user_input):
+        """
+        Engages in a continuous bidirectional conversation based on the user input.
+
+        Parameters
+        ----------
+            user_input : str
+                The user input.
+
+        Returns
+        -------
+            str
+                The model's response.
+        """
         self.chat_history.append(user_input)
         
         prompts = [self.chat_history]
@@ -94,6 +157,14 @@ class MultiModalInference:
         return response
     
     def set_checkpoint(self, checkpoint):
+        """
+        Changes the model checkpoint.
+
+        Parameters
+        ----------
+            checkpoint : str
+                The name of the new pre-trained model checkpoint.
+        """
         self.model = IdeficsForVisionText2Text.from_pretrained(
             checkpoint,
             torch_dtype=torch.bfloat16
@@ -101,6 +172,14 @@ class MultiModalInference:
         self.processor = AutoProcessor.from_pretrained(checkpoint)
     
     def set_device(self, device):
+        """
+        Changes the device used for inference.
+
+        Parameters
+        ----------
+            device : str
+                The new device to use for inference.
+        """
         self.device = device
         self.model.to(self.device)
     
