@@ -5,7 +5,7 @@ from torch.multiprocessing import set_start_method
 from torch.nn.parallel import DistributedDataParallel as DDP
 from transformers import AutoModelForCausalLM, AutoTokenizer, GPTQConfig
 
-from exa.utils.decoding_wrapper import real_time_decoding
+# from exa.utils.decoding_wrapper import real_time_decoding
 
 #set up logging
 logging.basicConfig(level=logging.INFO)
@@ -82,7 +82,7 @@ class GPTQInference:
         
         logger.info(f"Model loaded from {self.model_id} on {self.device}")
     
-    @real_time_decoding
+    # @real_time_decoding
     def run(
             self, 
             prompt: str,
