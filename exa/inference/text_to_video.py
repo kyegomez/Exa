@@ -1,7 +1,11 @@
+import logging
+
 import torch
 from diffusers import DiffusionPipeline, DPMSolverMultistepScheduler
 from diffusers.utils import export_to_video
 from PIL import Image
+from termcolor import colored
+
 
 class TextToVideo:
     """
@@ -94,51 +98,56 @@ class TextToVideo:
             str: The path to the generated video.
 
         """
-        # Generate low resolution video
-        pipe = DiffusionPipeline.from_pretrained(
-            self.model_name, 
-            torch_dtype=torch.float16
-        )
-        pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
-        pipe.enable_model_cpu_offload()
+        try:
 
-        pipe.enable_vae_slicing()
-        pipe.unet.enable_forward_chunking(chunk_size=1, dim=1)
+            # Generate low resolution video
+            pipe = DiffusionPipeline.from_pretrained(
+                self.model_name, 
+                torch_dtype=torch.float16
+            )
+            pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
+            pipe.enable_model_cpu_offload()
 
-        video_frames = pipe(
-            self.prompt,
-            num_inference_steps=self.num_inference_steps,
-            height=self.height,
-            width=self.width,
-            num_frames=self.num_frames
-        ).frames
+            pipe.enable_vae_slicing()
+            pipe.unet.enable_forward_chunking(chunk_size=1, dim=1)
 
-        # Upscale the video
-        pipe = DiffusionPipeline.from_pretrained(
-            self.model_name, 
-            torch_dtype=torch.float16
-        )
+            video_frames = pipe(
+                self.prompt,
+                num_inference_steps=self.num_inference_steps,
+                height=self.height,
+                width=self.width,
+                num_frames=self.num_frames
+            ).frames
 
-        pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
-        pipe.enable_model_cpu_offload()
-        pipe.enable_vae_slicing()
+            # Upscale the video
+            pipe = DiffusionPipeline.from_pretrained(
+                self.model_name, 
+                torch_dtype=torch.float16
+            )
 
-        video = [
-            Image.fromarray(frame).resize(
-                (self.width, self.height)
-            ) for frame in video_frames
-        ]
+            pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
+            pipe.enable_model_cpu_offload()
+            pipe.enable_vae_slicing()
 
-        video_frames = pipe(
-            self.prompt,
-            video=video,
-            strength=self.strength
-        ).frames
+            video = [
+                Image.fromarray(frame).resize(
+                    (self.width, self.height)
+                ) for frame in video_frames
+            ]
 
-        # Export the video
-        video_path = export_to_video(
-            video_frames, 
-            output_video_path=self.output_video_path
-        )
+            video_frames = pipe(
+                self.prompt,
+                video=video,
+                strength=self.strength
+            ).frames
 
-        return video_path
+            # Export the video
+            video_path = export_to_video(video_frames, output_video_path=self.output_video_path, output_format=self.output_format)
+
+            print(colored(f'Successfully generated the video at: {video_path}', 'green'))
+            return video_path
+
+        except Exception as e:
+            print(colored(f'An error occurred: {str(e)}', 'red'))
+            logging.error(f'An error occurred: {str(e)}')
+
