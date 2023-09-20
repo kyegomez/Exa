@@ -3,7 +3,7 @@ import logging
 import torch
 from torch.nn.parallel import DistributedDataParallel as DDP
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
-
+from exa.utils.metric_logger import Logging
 
 class Inference:
     """
@@ -50,6 +50,7 @@ class Inference:
         self.distributed = distributed
         self.decoding = decoding
         self.model, self.tokenizer = None, None
+        self.log = Logging()
         
 
         if self.distributed:
@@ -117,11 +118,15 @@ class Inference:
         self.load_model()
 
         max_length = max_length if max_length else self.max_length
+
         try:
             inputs = self.tokenizer.encode(
                 prompt_text, 
                 return_tensors="pt"
             ).to(self.device)
+
+            self.log.start()
+
 
             if self.decoding:
                 with torch.no_grad():
@@ -153,6 +158,16 @@ class Inference:
                     )
                 
             del inputs
+
+            #stop logger
+            self.log.stop()
+
+            #cal number of tokens
+            num_tokens = len(prompt_text.split())
+            self.logger.add_tokens(num_tokens)
+
+            #print the summary of the metrics
+            self.log.print_summary()
 
             return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
         except Exception as e:
