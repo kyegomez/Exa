@@ -126,6 +126,8 @@ quantize.load_from_hub('my model')
 
 We're excited about the journey ahead and would love to have you with us! For feedback, suggestions, or contributions, feel free to open an issue or a pull request. Let's shape the future of fine-tuning together! 🌱
 
+[Check out our project board for our current backlog and features we're implementing](https://github.com/users/kyegomez/projects/8/views/2)
+
 ------
 
 # Benchmarks
