@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "exxa"
-version = "0.4.3"
+version = "0.4.9"
 description = "Exa - Pytorch"
 license = "MIT"
 authors = ["Kye Gomez <kye@apac.ai>"]
@@ -41,9 +41,8 @@ slowapi = "*"
 fastapi = "*"
 loguru = "*"
 pydantic = "*"
-
-
-
+uvicorn = "*"
+fastapi-pagination = "*"
 
 
 [tool.poetry.dev-dependencies]
