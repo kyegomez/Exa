@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 import requests
 import torch
-import torchvision.transform as T
+import torchvision.transforms as T
 from PIL import Image
 from transformers import AutoModelForVision2Seq, AutoProcessor
 
@@ -48,7 +48,11 @@ class Kosmos:
     def get_image(self, url):
         return Image.open(requests.get(url, stream=True).raw)
     
-    def run(self, prompt, image):
+    def run(
+            self, 
+            prompt, 
+            image
+        ):
         inputs = self.processor(text=prompt, images=image, return_tensors="pt")
         generated_ids = self.model.generate(
             pixel_values=inputs["pixel_values"],
@@ -67,11 +71,11 @@ class Kosmos:
             generated_texts
         )
     
-    def run(self, prompt, image_url):
-        image = self.get_image(image_url)
-        processed_text, entities = self.process_pormpt(prompt, image)
-        print(processed_text)
-        print(entities)
+    # def run(self, prompt, image_url):
+    #     image = self.get_image(image_url)
+    #     processed_text, entities = self.process_pormpt(prompt, image)
+    #     print(processed_text)
+    #     print(entities)
     
     #tasks
     def multimodal_grounding(self, phrase, image_url):
