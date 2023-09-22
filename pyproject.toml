@@ -39,6 +39,9 @@ einops = "*"
 colored = "*"
 slowapi = "*"
 fastapi = "*"
+loguru = "*"
+pydantic = "*"
+
 
 
 
