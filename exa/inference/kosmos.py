@@ -1,4 +1,3 @@
-# Kosmos Inference Class
 import os
 
 import cv2
@@ -87,7 +86,7 @@ class Kosmos:
         self.run(prompt, image_url)
     
     def referring_expression_generation(self, phrase, image_url):
-        prompt = f"<grounding><phrase> It</phrase><object><patch_index_0044><patch_index_0863></object> is"
+        prompt = "<grounding><phrase> It</phrase><object><patch_index_0044><patch_index_0863></object> is"
         self.run(prompt, image_url)
     
     def grounded_vqa(self, question, image_url):
@@ -95,11 +94,11 @@ class Kosmos:
         self.run(prompt, image_url)
     
     def grounded_image_captioning(self, image_url):
-        prompt = f"<grounding> An image of"
+        prompt = "<grounding> An image of"
         self.run(prompt, image_url)
     
     def grounded_image_captioning_detailed(self, image_url):
-        prompt = f"<grounding> Describe this image in detail"
+        prompt = "<grounding> Describe this image in detail"
         self.run(prompt, image_url)
         
     def draw_entity_boxes_on_image(image, entities, show=False, save_path=None):
