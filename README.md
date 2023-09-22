@@ -110,6 +110,22 @@ quantize.load_from_hub('my model')
 
 -----
 
+# API
+To deploy your model as an API, we've provided a simple script to deploy the model with fastapi.
+```python
+
+from exa.utils import Deploy
+from exa import Inference
+
+model = Inference(
+    model_id="georgesung/llama2_7b_chat_uncensored",
+    quantize=True
+)
+
+api = Deploy(model=model)
+api.run()
+```
+
 ## 🎉 Features 🎉
 
 - **World-Class Quantization**: Get the most out of your models with top-tier performance and preserved accuracy! 🏋️‍♂️
