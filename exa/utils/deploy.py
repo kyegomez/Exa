@@ -1,96 +1,90 @@
-from fastapi import FastAPI, Depends, HTTPException, status, BackgroundTasks, File, UploadFile, Security
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm, APIKeyHeader
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from typing import Optional
-from sqlalchemy.orm import Session
-from loguru import logger
-from datetime import datetime, timedelta
+import os
+from typing import List
+
 import uvicorn
-import jwt
+from fastapi import BackgroundTasks, FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi_pagination import PaginationParams, paginate
+from fastapi_pagination.bases import AbstractPage
+from fastapi_pagination.ext.tortoise import paginate
+from loguru import logger
+from pydantic import BaseModel
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.limiter import Limiter
+from slowapi.middleware import SlowAPIMiddleware
+from slowapi.util import get_remote_address
 
-# Import your database models, schemas, crud operations, security, and other modules here
+limiter = Limiter(key_func=get_remote_address)
+app = FastAPI()
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+app.add_middleware(SlowAPIMiddleware)
 
-class User(BaseModel):
-    email: str = None
-    full_name: str = None
-    disabled: bool = None
-
-class Token(BaseModel):
-    access_token: str
-    token_type: str
-
-class TokenData(BaseModel):
-    username: Optional[str] = None
-
-class LLM:
-    def run(self, prompt: str, image: UploadFile):
-        # Add your LLM logic here
-        pass
+class Prompt(BaseModel):
+    text: str
+    max_length: int = 20
 
 class Deploy:
-    def __init__(self, title: str, version: str, description: str, database_url: str, secret_key: str, algorithm: str, access_token_expire_minutes: int):
-        self.title = title
-        self.version = version
-        self.description = description
-        self.database_url = database_url
-        self.secret_key = secret_key
-        self.algorithm = algorithm
-        self.access_token_expire_minutes = access_token_expire_minutes
-        self.app = FastAPI(title=self.title, version=self.version, description=self.description)
-        self.api_key = APIKeyHeader(name="X-API-Key", auto_error=False)
-        self.llm = LLM()
+    def __init__(
+        self,
+        llm,
+        device: str = None,
+        max_length: int = 20,
+        quantize: bool = False,
+        quantization_config: dict = None,
+        verbose: bool = False,
+        distributed: bool = False,
+        decoding: bool = False,
+        app: FastAPI = None,
+        host: str = "0.0.0.0",
+        port: int = 8000,
+    ):
+        self.llm = llm
+        self.device = device
+        self.max_length = max_length
+        self.quantize = quantize
+        self.quantization_config = quantization_config
+        self.verbose = verbose
+        self.distributed = distributed
+        self.decoding = decoding
+        self.app = app if app else FastAPI()
+        self.host = host
+        self.port = port
 
-        # Add middleware
-        self.app.add_middleware(
-            CORSMiddleware,
-            allow_origins=["*"],
-            allow_credentials=True,
-            allow_methods=["*"],
-            allow_headers=["*"],
-        )
-
-        # Add event handlers
         @self.app.on_event("startup")
-        async def startup_event():
-            # Add your startup code here
-            pass
+        def load_model():
+            self.load_model()
 
-        @self.app.on_event("shutdown")
-        async def shutdown_event():
-            # Add your shutdown code here
-            pass
+        @self.app.post("/generate/")
+        @limiter.limit("5/minute")  # rate limit
+        async def generate(prompt: Prompt):
+            return self.generate(prompt)
 
-        # Add routes
-        @self.app.post("/token", response_model=Token)
-        def login_for_access_token(api_key: str = Security(self.api_key)):
-            if api_key != self.secret_key:
-                raise HTTPException(
-                    status_code=status.HTTP_401_UNAUTHORIZED,
-                    detail="Incorrect API key",
-                    headers={"WWW-Authenticate": "Bearer"},
-                )
-            access_token_expires = timedelta(minutes=self.access_token_expire_minutes)
-            access_token = create_access_token(
-                data={"sub": api_key}, expires_delta=access_token_expires
-            )
-            return {"access_token": access_token, "token_type": "bearer"}
+        @self.app.get("/items/")
+        async def read_items(params: PaginationParams = Depends()):
+            items = [{"item": "item1"}, {"item": "item2"}, {"item": "item3"}]  # example items
+            return paginate(items)
 
-        @self.app.post("/llm/run")
-        async def run_llm(prompt: str, image: UploadFile = File(...), api_key: str = Security(self.api_key)):
-            if api_key != self.secret_key:
-                raise HTTPException(
-                    status_code=status.HTTP_401_UNAUTHORIZED,
-                    detail="Incorrect API key",
-                    headers={"WWW-Authenticate": "Bearer"},
-                )
-            return self.llm.run(prompt, image)
+        @self.app.get("/download/")
+        async def download_file():
+            return FileResponse('path_to_file', filename='filename')
 
-        # Add more routes as needed
+    def load_model(self):
+        global inference
+        inference = self.llm
 
-    def run(self, host: str, port: int):
-        uvicorn.run(self.app, host=host, port=port)
+    async def generate(self, prompt: Prompt):
+        try:
+            return {"generated_text": inference.run(prompt.text, prompt.max_length)}
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
-# You can then instantiate the Deploy class with your specific parameters and run it
-# deploy = Deploy(title="My API", version="1.0", description="My API Description", database_url="sqlite:///./test.db", secret_key="mysecretkey", algorithm="HS256", access_token_expire_minutes=30)
-# deploy.run(host="0.0.0.0", port=8000)
+    def run(self):
+        uvicorn.run(self.app, host=self.host, port=self.port)
+
+# if __name__ == "__main__":
+#     llm = Inference(model_id="gpt2-small")  # replace with your LLM
+#     deploy = Deploy(llm)
+#     deploy.run()

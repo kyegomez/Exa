@@ -37,6 +37,8 @@ auto-gptq = "*"
 diffusers = "*"
 einops = "*"
 colored = "*"
+slowapi = "*"
+fastapi = "*"
 
 
 
