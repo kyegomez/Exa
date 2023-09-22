@@ -43,6 +43,8 @@ loguru = "*"
 pydantic = "*"
 uvicorn = "*"
 fastapi-pagination = "*"
+torchvision = "*"
+cv2 = "*"
 
 
 [tool.poetry.dev-dependencies]
