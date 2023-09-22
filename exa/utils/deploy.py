@@ -30,25 +30,11 @@ class Deploy:
     def __init__(
         self,
         llm,
-        device: str = None,
-        max_length: int = 20,
-        quantize: bool = False,
-        quantization_config: dict = None,
-        verbose: bool = False,
-        distributed: bool = False,
-        decoding: bool = False,
         app: FastAPI = None,
         host: str = "0.0.0.0",
         port: int = 8000,
     ):
         self.llm = llm
-        self.device = device
-        self.max_length = max_length
-        self.quantize = quantize
-        self.quantization_config = quantization_config
-        self.verbose = verbose
-        self.distributed = distributed
-        self.decoding = decoding
         self.app = app if app else FastAPI()
         self.host = host
         self.port = port
