@@ -5,9 +5,6 @@ from torch.multiprocessing import set_start_method
 from torch.nn.parallel import DistributedDataParallel as DDP
 from transformers import AutoModelForCausalLM, AutoTokenizer, GPTQConfig
 
-# from exa.utils.decoding_wrapper import real_time_decoding
-
-#set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 

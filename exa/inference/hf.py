@@ -3,7 +3,9 @@ import logging
 import torch
 from torch.nn.parallel import DistributedDataParallel as DDP
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+
 from exa.utils.metric_logger import Logging
+
 
 class Inference:
     """
