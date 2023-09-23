@@ -1,4 +1,4 @@
-from typing import Generator, List, NoneType, Optional, Sequence, Union
+from typing import Generator, NoneType, Optional, Sequence, Union
 
 from ctransformers import AutoModelForCausalLM, AutoTokenizer
 from ctransformers.hub import AutoConfig
