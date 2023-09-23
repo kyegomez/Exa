@@ -1,3 +1,7 @@
+from exa.exa import exa
+
+print(exa)
+
 from exa.inference.ctransformers import CInference
 from exa.inference.gptq import GPTQInference
 from exa.inference.hf import Inference
