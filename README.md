@@ -74,6 +74,29 @@ inference = GPTQInference(
 output_text = inference.run("The future of AI is")
 print(output_text)
 ```
+----
+
+# `CInference``
+* This is optimized Inference with the Ctransformers library!
+```python
+from exa import CInference
+
+model = CInference('marella/gpt-2-ggml', hf=True)
+
+#run method
+output = model.run(
+    "ai is going to.....",
+    max_new_tokens=256,
+    top_k=40,
+    top_p=0.95,
+    temperature=0.8,
+    repition_penalty=1.1
+)
+
+print(output)
+
+```
+
 ---
 
 ## Quantize
@@ -104,7 +127,6 @@ quantize = Quantize(
 quantize.load_model()
 quantize.push_to_hub("my model")
 quantize.load_from_hub('my model')
-
 
 ```
 

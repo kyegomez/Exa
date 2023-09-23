@@ -46,7 +46,7 @@ class CInference:
             batch_size: Optional[int] = None,
             threads: Optional[int] = None,
             stop: Optional[Sequence[str]] = None,
-            stream: Optional[bool] = None,
+            stream: Optional[bool] = True,
             reset: Optional[bool] = None
         ) -> Union[str, Generator[str, NoneType, NoneType]]:
         if self.tokenizer:

@@ -4,6 +4,7 @@ from exa.quant.main import Quantize
 from exa.inference.text_to_video import TextToVideo
 from exa.inference.mmi import MultiModalInference
 from exa.inference.kosmos import Kosmos
+from exa.inference.ctransformers import CInference
 
 #utils
 from exa.utils.metric_logger import Logging
