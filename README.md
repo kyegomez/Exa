@@ -144,8 +144,13 @@ model = Inference(
     quantize=True
 )
 
-api = Deploy(model=model)
+api = Deploy()
+api.load_model()
+api.generate("Hello, my name is whaaa")
 api.run()
+
+
+
 ```
 
 ## 🎉 Features 🎉
