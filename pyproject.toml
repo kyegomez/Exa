@@ -45,6 +45,7 @@ uvicorn = "*"
 fastapi-pagination = "*"
 torchvision = "*"
 opencv-python = "*"
+ctransformers = "*"
 
 
 [tool.poetry.dev-dependencies]
