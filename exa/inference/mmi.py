@@ -1,5 +1,6 @@
 import torch
-from transformers import IdeficsForVisionText2Text, AutoProcessor
+from transformers import AutoProcessor, IdeficsForVisionText2Text
+
 
 class MultiModalInference:
     """

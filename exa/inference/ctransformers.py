@@ -1,7 +1,6 @@
 from types import NoneType
 from typing import Generator, Optional, Sequence, Union
 
-
 from ctransformers import AutoModelForCausalLM, AutoTokenizer
 from ctransformers.hub import AutoConfig
 from ctransformers.llm import Config
