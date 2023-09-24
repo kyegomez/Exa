@@ -132,6 +132,62 @@ class MultiModalInference:
         )
         return generated_text
     
+    def __call__(
+        self,
+        prompts,
+        batched_mode=True
+    ):
+        """
+        Generates text based on the provided prompts.
+
+        Parameters
+        ----------
+            prompts : list
+                A list of prompts. Each prompt is a list of text strings and images.
+            batched_mode : bool, optional
+                Whether to process the prompts in batched mode. If True, all prompts are processed together. If False, only the first prompt is processed (default is True).
+
+        Returns
+        -------
+            list
+                A list of generated text strings.
+        """
+        inputs = self.processor(
+            prompts,
+            add_end_of_utterance_token=False,
+            return_tensors="pt"
+        ).to(self.device) if batched_mode else self.processor(
+            prompts[0],
+            return_tensors="pt"
+        ).to(self.device)
+        
+
+        exit_condition = self.processor.tokenizer(
+            "<end_of_utterance>",
+            add_special_tokens=False
+        ).input_ids
+
+        bad_words_ids = self.processor.tokenizer(
+            [
+                "<image>",
+                "<fake_token_around_image"
+            ],
+
+            add_special_tokens=False
+        ).input_ids
+
+        generated_ids = self.model.generate(
+            **inputs,
+            eos_token_id=exit_condition,
+            bad_words_ids=bad_words_ids,
+            max_length=self.max_length,
+        )
+        generated_text = self.processor.batch_decode(
+            generated_ids,
+            skip_special_tokens=True
+        )
+        return generated_text
+    
     def chat(self, user_input):
         """
         Engages in a continuous bidirectional conversation based on the user input.

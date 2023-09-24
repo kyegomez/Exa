@@ -175,3 +175,77 @@ class Inference:
         except Exception as e:
             self.logger.error(f"Failed to generate the text: {e}")
             raise
+    
+    def __call__(
+            self, 
+            prompt_text: str, 
+            max_length: int = None
+        ):
+        """
+        Generate a response based on the prompt text.
+
+        Args:
+        - prompt_text (str): Text to prompt the model.
+        - max_length (int): Maximum length of the response.
+
+        Returns:
+        - Generated text (str).
+        """
+        self.load_model()
+
+        max_length = max_length if max_length else self.max_length
+
+        try:
+            inputs = self.tokenizer.encode(
+                prompt_text, 
+                return_tensors="pt"
+            ).to(self.device)
+
+            self.log.start()
+
+
+            if self.decoding:
+                with torch.no_grad():
+                    for _ in range(max_length):
+                        output_sequence = []
+
+                        outputs = self.model.generate(
+                            inputs,
+                            max_length=len(inputs) + 1, 
+                            do_sample=True
+                        )
+                        output_tokens = outputs[0][-1]
+                        output_sequence.append(output_tokens.item())
+
+                        #print token in real-time
+                        print(self.tokenizer.decode(
+                            [output_tokens], 
+                            skip_special_tokens=True), 
+                            end="",
+                            flush=True
+                        )
+                        inputs = outputs
+            else:
+                with torch.no_grad():
+                    outputs = self.model.generate(
+                        inputs, 
+                        max_length=max_length, 
+                        do_sample=True
+                    )
+                
+            del inputs
+
+            #stop logger
+            self.log.stop()
+
+            #cal number of tokens
+            num_tokens = len(prompt_text.split())
+            self.logger.add_tokens(num_tokens)
+
+            #print the summary of the metrics
+            self.log.print_summary()
+
+            return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+        except Exception as e:
+            self.logger.error(f"Failed to generate the text: {e}")
+            raise

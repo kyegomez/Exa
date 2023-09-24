@@ -69,6 +69,29 @@ class Kosmos:
         processed_text, entities = self.processor.post_process_generation(
             generated_texts
         )
+
+    def __call__(
+            self, 
+            prompt, 
+            image
+        ):
+        inputs = self.processor(text=prompt, images=image, return_tensors="pt")
+        generated_ids = self.model.generate(
+            pixel_values=inputs["pixel_values"],
+            input_ids=inputs["input_ids"][:, :-1],
+            attention_mask=inputs["attention_mask"][:, :-1],
+            img_features=None,
+            img_attn_mask=inputs["img_attn_mask"][:, :-1],
+            use_cache=True,
+            max_new_tokens=64,
+        )
+        generated_texts = self.processor.batch_decode(
+            generated_ids, 
+            skip_special_tokens=True,   
+        )[0]
+        processed_text, entities = self.processor.post_process_generation(
+            generated_texts
+        )
     
     # def run(self, prompt, image_url):
     #     image = self.get_image(image_url)

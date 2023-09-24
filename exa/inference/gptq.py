@@ -123,6 +123,49 @@ class GPTQInference:
             print(f"Error: {error} in inference mode, please change the inference logic or try again")
             raise
     
+    def __call__(
+            self, 
+            prompt: str,
+            max_length: int = 500,
+        ):
+        """
+        Run the GPT-Q inference.
+
+        Args:
+            prompt (str): The input prompt for generating the output.
+            max_length (int, optional): The maximum length of the generated output. Default is 500.
+
+        Returns:
+            str: The generated output.
+
+        Raises:
+            Exception: If there is an error in the inference mode.
+
+        """
+        max_length = self.max_length or max_length
+        
+        try:
+            inputs = self.tokenizer.encode(
+                prompt,
+                return_tensors="pt"
+            ).to(self.device)
+
+            with torch.no_grad():
+                outputs = self.model.generate(
+                    inputs,
+                    max_length=max_length,
+                    do_sample=True
+                )
+
+            return self.tokenizer.decode(
+                outputs[0],
+                skip_special_tokens=True
+            )
+        
+        except Exception as error:
+            print(f"Error: {error} in inference mode, please change the inference logic or try again")
+            raise
+    
     def __del__(self):
         #free up resources
         torch.cuda.empty_cache()
