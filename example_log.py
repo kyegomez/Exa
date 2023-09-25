@@ -1,8 +1,8 @@
 from exa import Logger, Inference
-
+from nvitop import Device
 
 # Initialize the Logger class to monitor GPU usage
-devices_to_monitor = [0]  # Replace with the GPU index you want to monitor
+devices_to_monitor = [Device(cuda_device_idx) for cuda_device_idx in [0]]
 logger = Logger(devices=devices_to_monitor)
 
 try:
