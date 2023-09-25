@@ -1,7 +1,10 @@
+import os
 import sentry_sdk
 from exa.exa import exa
 
 print(exa)
+
+os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = True
 
 
 sentry_sdk.init(
