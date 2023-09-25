@@ -17,7 +17,7 @@ torchvision
 opencv-python 
 ctransformers 
 nvitop
-
+hf-transfer
 
 
 mkdocs
