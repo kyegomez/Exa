@@ -4,8 +4,6 @@ import torch
 from torch.nn.parallel import DistributedDataParallel as DDP
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
-from exa.utils.metric_logger import Logging
-
 
 class Inference:
     """
@@ -127,7 +125,7 @@ class Inference:
                 return_tensors="pt"
             ).to(self.device)
 
-            self.log.start()
+            # self.log.start()
 
 
             if self.decoding:
@@ -201,7 +199,7 @@ class Inference:
                 return_tensors="pt"
             ).to(self.device)
 
-            self.log.start()
+            # self.log.start()
 
 
             if self.decoding:
