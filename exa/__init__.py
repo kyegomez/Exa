@@ -19,3 +19,4 @@ from exa.utils.deploy import Deploy
 
 #utils
 from exa.utils.metric_logger import Logging
+from exa.utils.logger import Logger
