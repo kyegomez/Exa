@@ -48,6 +48,7 @@ opencv-python = "*"
 ctransformers = "*"
 nvitop = "*" 
 hf-transfer = "*"
+sentry-sdk = "*"
 
 
 [tool.poetry.dev-dependencies]
