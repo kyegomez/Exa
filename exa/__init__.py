@@ -3,7 +3,7 @@ from exa.exa import exa
 print(exa)
 
 #inference
-from exa.inference.ctransformers import CInference
+# from exa.inference.ctransformers import CInference
 from exa.inference.gptq import GPTQInference
 from exa.inference.hf import Inference
 from exa.inference.kosmos import Kosmos
