@@ -16,6 +16,9 @@ fastapi-pagination
 torchvision 
 opencv-python 
 ctransformers 
+nvitop
+
+
 
 mkdocs
 mkdocs-material
