@@ -162,14 +162,14 @@ class Inference:
             del inputs
 
             #stop logger
-            self.log.stop()
+            # self.log.stop()
 
-            #cal number of tokens
-            num_tokens = len(prompt_text.split())
-            self.logger.add_tokens(num_tokens)
+            # #cal number of tokens
+            # num_tokens = len(prompt_text.split())
+            # self.logger.add_tokens(num_tokens)
 
             #print the summary of the metrics
-            self.log.print_summary()
+            # self.log.print_summary()
 
             return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
         except Exception as e:
