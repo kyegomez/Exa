@@ -46,6 +46,7 @@ fastapi-pagination = "*"
 torchvision = "*"
 opencv-python = "*"
 ctransformers = "*"
+nvitop = "*"
 
 
 [tool.poetry.dev-dependencies]
