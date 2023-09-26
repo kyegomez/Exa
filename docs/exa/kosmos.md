@@ -1,151 +1,186 @@
-# Kosmos Documentation
+# Kosmos Class Documentation
 
-Kosmos is a model to perform multimodal tasks by combining natural language understanding and computer vision capabilities. It leverages a pre-trained model to enable tasks such as multimodal grounding, referring expression comprehension, referring expression generation, grounded visual question answering (VQA), and grounded image captioning.
 
-## Class: Kosmos
+The `Kosmos` class is a Python class that provides a set of methods for performing various tasks related to multimodal grounding, referring expression comprehension, referring expression generation, grounded visual question answering, and grounded image captioning. The class uses the `transformers` library to load a pretrained model and processor for performing these tasks.
 
-### Purpose
+Class Definition
+----------------
 
-The `Kosmos` class is the central component of the Shapeless library. It enables users to interact with pre-trained models for multimodal tasks that involve text and images. By initializing an instance of `Kosmos`, you gain access to various multimodal capabilities.
-
-### Class Definition
-
-```python
+```
 class Kosmos:
-    def __init__(self, model_name="ydshieh/kosmos-2-patch14-224"):
-        """
-        Initialize the Kosmos class.
-
-        Parameters:
-        - model_name (str): The name of the pre-trained model to use (default: "ydshieh/kosmos-2-patch14-224").
-        """
+    def __init__(self, model_name="ydshieh/kosmos-2-patch14-224")
+    def get_image(self, url)
+    def run(self, prompt, image)
+    def __call__(self, prompt, image)
+    def multimodal_grounding(self, phrase, image_url)
+    def referring_expression_comprehension(self, phrase, image_url)
+    def referring_expression_generation(self, phrase, image_url)
+    def grounded_vqa(self, question, image_url)
+    def grounded_image_captioning(self, image_url)
+    def grounded_image_captioning_detailed(self, image_url)
+    def draw_entity_boxes_on_image(image, entities, show=False, save_path=None)
+    def generate_boxees(self, prompt, image_url)
 ```
 
-### How It Works
 
-The `Kosmos` class utilizes a pre-trained model to perform multimodal tasks. It takes text and image inputs and returns results based on the model's understanding of the multimodal context.
+## Class Methods
+-------------
 
-### Usage
+### `__init__(self, model_name="ydshieh/kosmos-2-patch14-224")`
 
-#### 1. Multimodal Grounding
+This method initializes the `Kosmos` class. It loads the pretrained model and processor from the `transformers` library.
 
-```python
+#### Parameters
+
+-   `model_name` (str): The name of the pretrained model to load. Default is `"ydshieh/kosmos-2-patch14-224"`.
+
+### `get_image(self, url)`
+
+This method retrieves an image from a given URL.
+
+#### Parameters
+
+-   `url` (str): The URL of the image to retrieve.
+
+#### Returns
+
+-   `Image`: The retrieved image.
+
+### `run(self, prompt, image)`
+
+This method runs the model with a given prompt and image.
+
+#### Parameters
+
+-   `prompt` (str): The prompt to use for the model.
+-   `image` (Image): The image to use for the model.
+
+### `__call__(self, prompt, image)`
+
+This method allows the `Kosmos` class to be called like a function. It runs the model with a given prompt and image.
+
+#### Parameters
+
+-   `prompt` (str): The prompt to use for the model.
+-   `image` (Image): The image to use for the model.
+
+### `multimodal_grounding(self, phrase, image_url)`
+
+This method performs multimodal grounding with a given phrase and image URL.
+
+#### Parameters
+
+-   `phrase` (str): The phrase to use for multimodal grounding.
+-   `image_url` (str): The URL of the image to use for multimodal grounding.
+
+### `referring_expression_comprehension(self, phrase, image_url)`
+
+This method performs referring expression comprehension with a given phrase and image URL.
+
+#### Parameters
+
+-   `phrase` (str): The phrase to use for referring expression comprehension.
+-   `image_url` (str): The URL of the image to use for referring expression comprehension.
+
+### `referring_expression_generation(self, phrase, image_url)`
+
+This method generates referring expressions with a given phrase and image URL.
+
+#### Parameters
+
+-   `phrase` (str): The phrase to use for referring expression generation.
+-   `image_url` (str): The URL of the image to use for referring expression generation.
+
+### `grounded_vqa(self, question, image_url)`
+
+This method performs grounded visual question answering with a given question and image URL.
+
+#### Parameters
+
+-   `question` (str): The question to use for grounded visual question answering.
+-   `image_url` (str): The URL of the image to use for grounded visual question answering.
+
+### `grounded_image_captioning(self, image_url)`
+
+This method generates a grounded image caption for a given image URL.
+
+#### Parameters
+
+-   `image_url` (str): The URL of the image to caption.
+
+### `grounded_image_captioning_detailed(self, image_url)`
+
+This method generates a detailed grounded image caption for a given image URL.
+
+#### Parameters
+
+-   `image_url` (str): The URL of the image to caption.
+
+### `draw_entity_boxes_on_image(image, entities, show=False, save_path=None)`
+
+This method draws bounding boxes around entities in an image.
+
+#### Parameters
+
+-   `image` (Image or str or torch.Tensor): The image or image path or image tensor on which to draw bounding boxes.
+-   `entities` (list): A list of entities to draw bounding boxes around.
+-   `show` (bool): Whether to display the image. Default is `False`.
+-   `save_path` (str): The path to save the image. If `None`, the image
+
+#### Returns
+
+-   `new_image` (numpy.ndarray): The image with bounding boxes drawn around entities.
+
+### `generate_boxees(self, prompt, image_url)`
+
+This method generates bounding boxes for entities in an image based on a given prompt.
+
+#### Parameters
+
+-   `prompt` (str): The prompt to use for generating bounding boxes.
+-   `image_url` (str): The URL of the image to use for generating bounding boxes.
+
+
+## Usage Examples
+--------------
+
+### Example 1: Multimodal Grounding
+
+```
+from Kosmos import Kosmos
+
 kosmos = Kosmos()
 kosmos.multimodal_grounding("Find the red apple in the image.", "https://example.com/apple.jpg")
 ```
 
-#### 2. Referring Expression Comprehension
 
-```python
+### Example 2: Referring Expression Comprehension
+
+```
+from Kosmos import Kosmos
+
+kosmos = Kosmos()
 kosmos.referring_expression_comprehension("Show me the green bottle.", "https://example.com/bottle.jpg")
 ```
 
-#### 3. Referring Expression Generation
 
-```python
-kosmos.referring_expression_generation("It is on the table.", "https://example.com/table.jpg")
+### Example 3: Grounded Visual Question Answering
+
 ```
+from Kosmos import Kosmos
 
-#### 4. Grounded Visual Question Answering (VQA)
-
-```python
+kosmos = Kosmos()
 kosmos.grounded_vqa("What is the color of the car?", "https://example.com/car.jpg")
 ```
 
-#### 5. Grounded Image Captioning
 
-```python
-kosmos.grounded_image_captioning("https://example.com/beach.jpg")
-```
+## Additional Information
+----------------------
 
-### Additional Tips
+The `Kosmos` class uses the `transformers` library to load a pretrained model and processor. The model is used to generate responses based on the given prompts and images, and the processor is used to process the inputs and outputs of the model.
 
-- You can use `Kosmos` for various multimodal tasks by calling the respective functions.
-- You can specify a different pre-trained model by providing the `model_name` parameter during initialization.
-- Use the `show` and `save_path` parameters when visualizing results to control display and save images.
+The `Kosmos` class provides a set of methods for performing various tasks related to multimodal grounding, referring expression comprehension, referring expression generation, grounded visual question answering, and grounded image captioning. These tasks involve generating responses based on the given prompts and images, and drawing bounding boxes around entities in the images.
 
-## Function: `draw_entity_boxes_on_image`
+The `Kosmos` class also provides a method for retrieving an image from a given URL, and a method for running the model with a given prompt and image. These methods are used internally by the other methods of the class.
 
-### Purpose
-
-The `draw_entity_boxes_on_image` function allows you to draw bounding boxes around entities in an image. It enhances the visual representation of detected entities.
-
-### Function Definition
-
-```python
-def draw_entity_boxes_on_image(image, entities, show=False, save_path=None):
-    """
-    Draw bounding boxes around entities in an image.
-
-    Parameters:
-    - image (str, Image.Image, torch.Tensor): The input image in various formats (image path, PIL image, or torch.Tensor).
-    - entities (list): A list of entities, where each entity is a tuple containing entity name, position (start, end), and bounding boxes.
-    - show (bool): If True, display the image with bounding boxes (default: False).
-    - save_path (str): If specified, save the image with bounding boxes to the given path.
-
-    Returns:
-    - np.ndarray: The image with bounding boxes.
-    """
-```
-
-### How It Works
-
-The `draw_entity_boxes_on_image` function takes an image and a list of entities as input. It then draws bounding boxes around the specified entities in the image.
-
-### Usage Example
-
-```python
-entities = [("red apple", (0, 1), [(0.2, 0.3, 0.4, 0.5)]), ("green bottle", (2, 3), [(0.6, 0.7, 0.8, 0.9)])]
-image_path = "image.jpg"
-
-result_image = draw_entity_boxes_on_image(image_path, entities, show=True, save_path="output.jpg")
-```
-
-### Additional Tips
-
-- The `show` parameter controls whether the image with bounding boxes is displayed.
-- You can use the `save_path` parameter to save the annotated image to a file.
-
-## Function: `generate_boxes`
-
-### Purpose
-
-The `generate_boxes` function allows you to generate bounding boxes around entities in an image based on a given prompt. It simplifies the process of highlighting entities in an image.
-
-### Function Definition
-
-```python
-def generate_boxes(prompt, image_url):
-    """
-    Generate bounding boxes around entities in an image based on a prompt.
-
-    Parameters:
-    - prompt (str): The prompt describing the entities to be highlighted.
-    - image_url (str): The URL of the image to process.
-
-    Returns:
-    - np.ndarray: The image with generated bounding boxes.
-    """
-```
-
-### How It Works
-
-The `generate_boxes` function takes a prompt and an image URL as input. It processes the prompt and generates bounding boxes around the entities mentioned in the prompt within the given image.
-
-### Usage Example
-
-```python
-prompt = "Find the red apple in the image."
-image_url = "https://example.com/apple.jpg"
-
-result_image = generate_boxes(prompt, image_url)
-```
-
-### Additional Tips
-
-- You can use this function to quickly visualize entities mentioned in a prompt within an image.
-- Ensure that the image URL is accessible and contains the image you want to process.
-
-## Conclusion
-
-The Shapeless library simplifies multimodal tasks involving natural language and computer vision. By utilizing the `Kosmos` class and related functions, you can easily perform tasks such as multimodal grounding, referring expression comprehension, referring expression generation, grounded VQA, and grounded image captioning. Additionally, the ability to draw bounding boxes and generate boxes enhances the visual representation of entities in images, making it a powerful tool for various applications.
+The `Kosmos` class can be used in a variety of applications, such as image captioning, visual question answering, and object detection. It provides a simple and intuitive interface for performing these tasks, making it easy to use for both beginners and experienced developers.
