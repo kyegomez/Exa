@@ -8,15 +8,13 @@ logger = Logger(devices=devices_to_monitor)
 try:
     logger.start_logging()
 
-    # Perform inference
-    for _ in range(1):  # Perform 10 inference iterations as an example
-        model = Inference(
-            model_id="openlm-research/open_llama_3b",
-            quantize=True
-        )
+# Perform inference
+    model = Inference(
+        model_id="openlm-research/open_llama_3b",
+        quantize=True
+    )
 
-        model.run("What is your name")
-    input("Press Enter to stop logging and exit...")
+    model.run("What is your name")
 except KeyboardInterrupt:
     pass
 finally:
