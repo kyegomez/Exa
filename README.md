@@ -76,7 +76,7 @@ print(output_text)
 ```
 ----
 
-# `CInference``
+# `CInference`
 * This is optimized Inference with the Ctransformers library!
 ```python
 from exa import CInference

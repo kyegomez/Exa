@@ -11,7 +11,7 @@ try:
     # Perform inference
     for _ in range(10):  # Perform 10 inference iterations as an example
         model = Inference(
-            model_id="georgesung/llama2_7b_chat_uncensored",
+            model_id="gpt2-small",
             quantize=True
         )
 
