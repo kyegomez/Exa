@@ -146,8 +146,8 @@ This method generates bounding boxes for entities in an image based on a given p
 
 ### Example 1: Multimodal Grounding
 
-```
-from Kosmos import Kosmos
+```python
+from exa import Kosmos
 
 kosmos = Kosmos()
 kosmos.multimodal_grounding("Find the red apple in the image.", "https://example.com/apple.jpg")
@@ -156,8 +156,8 @@ kosmos.multimodal_grounding("Find the red apple in the image.", "https://example
 
 ### Example 2: Referring Expression Comprehension
 
-```
-from Kosmos import Kosmos
+```python
+from exa import Kosmos
 
 kosmos = Kosmos()
 kosmos.referring_expression_comprehension("Show me the green bottle.", "https://example.com/bottle.jpg")
@@ -166,8 +166,8 @@ kosmos.referring_expression_comprehension("Show me the green bottle.", "https://
 
 ### Example 3: Grounded Visual Question Answering
 
-```
-from Kosmos import Kosmos
+```python
+from exa import Kosmos
 
 kosmos = Kosmos()
 kosmos.grounded_vqa("What is the color of the car?", "https://example.com/car.jpg")
