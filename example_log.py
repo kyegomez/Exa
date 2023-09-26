@@ -9,7 +9,7 @@ try:
     logger.start_logging()
 
     # Perform inference
-    for _ in range(10):  # Perform 10 inference iterations as an example
+    for _ in range(1):  # Perform 10 inference iterations as an example
         model = Inference(
             model_id="openlm-research/open_llama_3b",
             quantize=True
