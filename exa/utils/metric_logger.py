@@ -3,6 +3,7 @@ import time
 import logging
 from termcolor import colored
 
+
 class Logging:
     """
     Logging class for tracking various metrics during inference.
@@ -25,17 +26,17 @@ class Logging:
         """Start the timer and reset the number of tokens."""
         self.start_time = time.time()
         self.num_tokens = 0
-        logging.debug('Timer started.')
+        logging.debug("Timer started.")
 
     def stop(self):
         """Stop the timer."""
         self.end_time = time.time()
-        logging.debug('Timer stopped.')
+        logging.debug("Timer stopped.")
 
     def add_tokens(self, num_tokens):
         """Add the number of tokens processed."""
         self.num_tokens += num_tokens
-        logging.debug(f'Added {num_tokens} tokens.')
+        logging.debug(f"Added {num_tokens} tokens.")
 
     def get_elapsed_time(self):
         """Get the elapsed time in seconds."""
@@ -67,12 +68,14 @@ class Logging:
 
     def print_summary(self):
         """Print a summary of the metrics."""
-        print(colored(f"Elapsed time: {self.get_elapsed_time()} seconds", 'green'))
-        print(colored(f"Tokens per second: {self.get_tokens_per_second()}", 'green'))
-        print(colored(f"Memory usage: {self.get_memory_usage()} bytes", 'yellow'))
-        print(colored(f"Max memory usage: {self.get_max_memory_usage()} bytes", 'yellow'))
-        print(colored(f"Number of CUDA devices: {self.get_num_cuda_devices()}", 'blue'))
-        print(colored(f"Device name: {self.get_device_name()}", 'blue'))
-        print(colored(f"Device capability: {self.get_device_capability()}", 'blue'))
+        print(colored(f"Elapsed time: {self.get_elapsed_time()} seconds", "green"))
+        print(colored(f"Tokens per second: {self.get_tokens_per_second()}", "green"))
+        print(colored(f"Memory usage: {self.get_memory_usage()} bytes", "yellow"))
+        print(
+            colored(f"Max memory usage: {self.get_max_memory_usage()} bytes", "yellow")
+        )
+        print(colored(f"Number of CUDA devices: {self.get_num_cuda_devices()}", "blue"))
+        print(colored(f"Device name: {self.get_device_name()}", "blue"))
+        print(colored(f"Device capability: {self.get_device_capability()}", "blue"))
 
-        logging.debug('Printed summary.')
+        logging.debug("Printed summary.")

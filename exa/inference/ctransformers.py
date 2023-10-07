@@ -34,23 +34,23 @@ class CInference:
             self.tokenizer = AutoTokenizer.from_pretrained(model_path)
         else:
             self.tokenizer = None
-    
+
     def run(
-            self, 
-            prompt: str,
-            max_new_tokens: Optional[int] = None,
-            top_k: Optional[int] = None,
-            top_p: Optional[float] = None,
-            temperature: Optional[float] = None,
-            repetition_penalty: Optional[float] = None,
-            last_n_tokens: Optional[int] = None,
-            seed: Optional[int] = None,
-            batch_size: Optional[int] = None,
-            threads: Optional[int] = None,
-            stop: Optional[Sequence[str]] = None,
-            stream: Optional[bool] = True,
-            reset: Optional[bool] = None
-        ) -> Union[str, Generator[str, NoneType, NoneType]]:
+        self,
+        prompt: str,
+        max_new_tokens: Optional[int] = None,
+        top_k: Optional[int] = None,
+        top_p: Optional[float] = None,
+        temperature: Optional[float] = None,
+        repetition_penalty: Optional[float] = None,
+        last_n_tokens: Optional[int] = None,
+        seed: Optional[int] = None,
+        batch_size: Optional[int] = None,
+        threads: Optional[int] = None,
+        stop: Optional[Sequence[str]] = None,
+        stream: Optional[bool] = True,
+        reset: Optional[bool] = None,
+    ) -> Union[str, Generator[str, NoneType, NoneType]]:
         if self.tokenizer:
             return self.model.__call__(
                 prompt,
@@ -65,7 +65,7 @@ class CInference:
                 threads=threads,
                 stop=stop,
                 stream=stream,
-                reset=reset
+                reset=reset,
             )
         else:
             tokens = self.model.tokenize(prompt)
@@ -79,25 +79,25 @@ class CInference:
                 seed=seed,
                 batch_size=batch_size,
                 threads=threads,
-                reset=reset
+                reset=reset,
             )
-        
+
     def __call__(
-            self, 
-            prompt: str,
-            max_new_tokens: Optional[int] = None,
-            top_k: Optional[int] = None,
-            top_p: Optional[float] = None,
-            temperature: Optional[float] = None,
-            repetition_penalty: Optional[float] = None,
-            last_n_tokens: Optional[int] = None,
-            seed: Optional[int] = None,
-            batch_size: Optional[int] = None,
-            threads: Optional[int] = None,
-            stop: Optional[Sequence[str]] = None,
-            stream: Optional[bool] = True,
-            reset: Optional[bool] = None
-        ) -> Union[str, Generator[str, NoneType, NoneType]]:
+        self,
+        prompt: str,
+        max_new_tokens: Optional[int] = None,
+        top_k: Optional[int] = None,
+        top_p: Optional[float] = None,
+        temperature: Optional[float] = None,
+        repetition_penalty: Optional[float] = None,
+        last_n_tokens: Optional[int] = None,
+        seed: Optional[int] = None,
+        batch_size: Optional[int] = None,
+        threads: Optional[int] = None,
+        stop: Optional[Sequence[str]] = None,
+        stream: Optional[bool] = True,
+        reset: Optional[bool] = None,
+    ) -> Union[str, Generator[str, NoneType, NoneType]]:
         if self.tokenizer:
             return self.model.__call__(
                 prompt,
@@ -112,7 +112,7 @@ class CInference:
                 threads=threads,
                 stop=stop,
                 stream=stream,
-                reset=reset
+                reset=reset,
             )
         else:
             tokens = self.model.tokenize(prompt)
@@ -126,5 +126,5 @@ class CInference:
                 seed=seed,
                 batch_size=batch_size,
                 threads=threads,
-                reset=reset
+                reset=reset,
             )

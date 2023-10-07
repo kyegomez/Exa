@@ -8,11 +8,8 @@ logger = Logger(devices=devices_to_monitor)
 try:
     logger.start_logging()
 
-# Perform inference
-    model = Inference(
-        model_id="openlm-research/open_llama_3b",
-        quantize=True
-    )
+    # Perform inference
+    model = Inference(model_id="openlm-research/open_llama_3b", quantize=True)
 
     model.run("What is your name")
 except KeyboardInterrupt:

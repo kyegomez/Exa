@@ -9,12 +9,11 @@ from PIL import Image
 from transformers import AutoModelForVision2Seq, AutoProcessor
 
 
-#utils
+# utils
 def is_overlapping(rect1, rect2):
     x1, y1, x2, y2 = rect1
     x3, y3, x4, y4 = rect2
     return not (x2 < x3 or x1 > x4 or y2 < y3 or y1 > y4)
-
 
 
 class Kosmos:
@@ -37,21 +36,22 @@ class Kosmos:
     # Generate grounded image caption
     kosmos.grounded_image_captioning("https://example.com/beach.jpg")
     """
+
     def __init__(
         self,
         model_name="ydshieh/kosmos-2-patch14-224",
     ):
-        self.model = AutoModelForVision2Seq.from_pretrained(model_name, trust_remote_code=True)
-        self.processor = AutoProcessor.from_pretrained(model_name, trust_remote_code=True)
+        self.model = AutoModelForVision2Seq.from_pretrained(
+            model_name, trust_remote_code=True
+        )
+        self.processor = AutoProcessor.from_pretrained(
+            model_name, trust_remote_code=True
+        )
 
     def get_image(self, url):
         return Image.open(requests.get(url, stream=True).raw)
-    
-    def run(
-            self, 
-            prompt, 
-            image
-        ):
+
+    def run(self, prompt, image):
         inputs = self.processor(text=prompt, images=image, return_tensors="pt")
         generated_ids = self.model.generate(
             pixel_values=inputs["pixel_values"],
@@ -63,18 +63,14 @@ class Kosmos:
             max_new_tokens=64,
         )
         generated_texts = self.processor.batch_decode(
-            generated_ids, 
-            skip_special_tokens=True,   
+            generated_ids,
+            skip_special_tokens=True,
         )[0]
         processed_text, entities = self.processor.post_process_generation(
             generated_texts
         )
 
-    def __call__(
-            self, 
-            prompt, 
-            image
-        ):
+    def __call__(self, prompt, image):
         inputs = self.processor(text=prompt, images=image, return_tensors="pt")
         generated_ids = self.model.generate(
             pixel_values=inputs["pixel_values"],
@@ -86,44 +82,44 @@ class Kosmos:
             max_new_tokens=64,
         )
         generated_texts = self.processor.batch_decode(
-            generated_ids, 
-            skip_special_tokens=True,   
+            generated_ids,
+            skip_special_tokens=True,
         )[0]
         processed_text, entities = self.processor.post_process_generation(
             generated_texts
         )
-    
+
     # def run(self, prompt, image_url):
     #     image = self.get_image(image_url)
     #     processed_text, entities = self.process_pormpt(prompt, image)
     #     print(processed_text)
     #     print(entities)
-    
-    #tasks
+
+    # tasks
     def multimodal_grounding(self, phrase, image_url):
         prompt = f"<grounding><phrase> {phrase} </phrase>"
         self.run(prompt, image_url)
-    
+
     def referring_expression_comprehension(self, phrase, image_url):
         prompt = f"<grounding><phrase> {phrase} </phrase>"
         self.run(prompt, image_url)
-    
+
     def referring_expression_generation(self, phrase, image_url):
         prompt = "<grounding><phrase> It</phrase><object><patch_index_0044><patch_index_0863></object> is"
         self.run(prompt, image_url)
-    
+
     def grounded_vqa(self, question, image_url):
         prompt = f"<grounding> Question: {question} Answer:"
         self.run(prompt, image_url)
-    
+
     def grounded_image_captioning(self, image_url):
         prompt = "<grounding> An image of"
         self.run(prompt, image_url)
-    
+
     def grounded_image_captioning_detailed(self, image_url):
         prompt = "<grounding> Describe this image in detail"
         self.run(prompt, image_url)
-        
+
     def draw_entity_boxes_on_image(image, entities, show=False, save_path=None):
         """_summary_
         Args:
@@ -145,8 +141,12 @@ class Kosmos:
         elif isinstance(image, torch.Tensor):
             # pdb.set_trace()
             image_tensor = image.cpu()
-            reverse_norm_mean = torch.tensor([0.48145466, 0.4578275, 0.40821073])[:, None, None]
-            reverse_norm_std = torch.tensor([0.26862954, 0.26130258, 0.27577711])[:, None, None]
+            reverse_norm_mean = torch.tensor([0.48145466, 0.4578275, 0.40821073])[
+                :, None, None
+            ]
+            reverse_norm_std = torch.tensor([0.26862954, 0.26130258, 0.27577711])[
+                :, None, None
+            ]
             image_tensor = image_tensor * reverse_norm_std + reverse_norm_mean
             pil_img = T.ToPILImage()(image_tensor)
             image_h = pil_img.height
@@ -165,40 +165,77 @@ class Kosmos:
         # thickness of text
         text_line = 1  # int(max(1 * min(image_h, image_w) / 512, 1))
         box_line = 3
-        (c_width, text_height), _ = cv2.getTextSize("F", cv2.FONT_HERSHEY_COMPLEX, text_size, text_line)
+        (c_width, text_height), _ = cv2.getTextSize(
+            "F", cv2.FONT_HERSHEY_COMPLEX, text_size, text_line
+        )
         base_height = int(text_height * 0.675)
         text_offset_original = text_height - base_height
         text_spaces = 3
 
         for entity_name, (start, end), bboxes in entities:
-            for (x1_norm, y1_norm, x2_norm, y2_norm) in bboxes:
-                orig_x1, orig_y1, orig_x2, orig_y2 = int(x1_norm * image_w), int(y1_norm * image_h), int(x2_norm * image_w), int(y2_norm * image_h)
+            for x1_norm, y1_norm, x2_norm, y2_norm in bboxes:
+                orig_x1, orig_y1, orig_x2, orig_y2 = (
+                    int(x1_norm * image_w),
+                    int(y1_norm * image_h),
+                    int(x2_norm * image_w),
+                    int(y2_norm * image_h),
+                )
                 # draw bbox
                 # random color
                 color = tuple(np.random.randint(0, 255, size=3).tolist())
-                new_image = cv2.rectangle(new_image, (orig_x1, orig_y1), (orig_x2, orig_y2), color, box_line)
+                new_image = cv2.rectangle(
+                    new_image, (orig_x1, orig_y1), (orig_x2, orig_y2), color, box_line
+                )
 
-                l_o, r_o = box_line // 2 + box_line % 2, box_line // 2 + box_line % 2 + 1
+                l_o, r_o = (
+                    box_line // 2 + box_line % 2,
+                    box_line // 2 + box_line % 2 + 1,
+                )
 
                 x1 = orig_x1 - l_o
                 y1 = orig_y1 - l_o
 
                 if y1 < text_height + text_offset_original + 2 * text_spaces:
-                    y1 = orig_y1 + r_o + text_height + text_offset_original + 2 * text_spaces
+                    y1 = (
+                        orig_y1
+                        + r_o
+                        + text_height
+                        + text_offset_original
+                        + 2 * text_spaces
+                    )
                     x1 = orig_x1 + r_o
 
                 # add text background
-                (text_width, text_height), _ = cv2.getTextSize(f"  {entity_name}", cv2.FONT_HERSHEY_COMPLEX, text_size, text_line)
-                text_bg_x1, text_bg_y1, text_bg_x2, text_bg_y2 = x1, y1 - (text_height + text_offset_original + 2 * text_spaces), x1 + text_width, y1
+                (text_width, text_height), _ = cv2.getTextSize(
+                    f"  {entity_name}", cv2.FONT_HERSHEY_COMPLEX, text_size, text_line
+                )
+                text_bg_x1, text_bg_y1, text_bg_x2, text_bg_y2 = (
+                    x1,
+                    y1 - (text_height + text_offset_original + 2 * text_spaces),
+                    x1 + text_width,
+                    y1,
+                )
 
                 for prev_bbox in previous_bboxes:
-                    while is_overlapping((text_bg_x1, text_bg_y1, text_bg_x2, text_bg_y2), prev_bbox):
-                        text_bg_y1 += (text_height + text_offset_original + 2 * text_spaces)
-                        text_bg_y2 += (text_height + text_offset_original + 2 * text_spaces)
-                        y1 += (text_height + text_offset_original + 2 * text_spaces)
+                    while is_overlapping(
+                        (text_bg_x1, text_bg_y1, text_bg_x2, text_bg_y2), prev_bbox
+                    ):
+                        text_bg_y1 += (
+                            text_height + text_offset_original + 2 * text_spaces
+                        )
+                        text_bg_y2 += (
+                            text_height + text_offset_original + 2 * text_spaces
+                        )
+                        y1 += text_height + text_offset_original + 2 * text_spaces
 
                         if text_bg_y2 >= image_h:
-                            text_bg_y1 = max(0, image_h - (text_height + text_offset_original + 2 * text_spaces))
+                            text_bg_y1 = max(
+                                0,
+                                image_h
+                                - (
+                                    text_height + text_offset_original + 2 * text_spaces
+                                ),
+                            )
                             text_bg_y2 = image_h
                             y1 = image_h
                             break
@@ -213,10 +250,20 @@ class Kosmos:
                             else:
                                 # white
                                 bg_color = [255, 255, 255]
-                            new_image[i, j] = (alpha * new_image[i, j] + (1 - alpha) * np.array(bg_color)).astype(np.uint8)
+                            new_image[i, j] = (
+                                alpha * new_image[i, j]
+                                + (1 - alpha) * np.array(bg_color)
+                            ).astype(np.uint8)
 
                 cv2.putText(
-                    new_image, f"  {entity_name}", (x1, y1 - text_offset_original - 1 * text_spaces), cv2.FONT_HERSHEY_COMPLEX, text_size, (0, 0, 0), text_line, cv2.LINE_AA
+                    new_image,
+                    f"  {entity_name}",
+                    (x1, y1 - text_offset_original - 1 * text_spaces),
+                    cv2.FONT_HERSHEY_COMPLEX,
+                    text_size,
+                    (0, 0, 0),
+                    text_line,
+                    cv2.LINE_AA,
                 )
                 # previous_locations.append((x1, y1))
                 previous_bboxes.append((text_bg_x1, text_bg_y1, text_bg_x2, text_bg_y2))
@@ -228,9 +275,8 @@ class Kosmos:
             pil_image.show()
 
         return new_image
-    
+
     def generate_boxees(self, prompt, image_url):
         image = self.get_image(image_url)
         processed_text, entities = self.process_prompt(prompt, image)
         self.draw_entity_boxes_on_image(image, entities, show=True)
-

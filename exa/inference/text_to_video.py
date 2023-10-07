@@ -77,7 +77,7 @@ class TextToVideo:
         width,
         num_frames,
         strength,
-        output_video_path
+        output_video_path,
     ):
         self.model_name = model_name
         self.prompt = prompt
@@ -99,13 +99,13 @@ class TextToVideo:
 
         """
         try:
-
             # Generate low resolution video
             pipe = DiffusionPipeline.from_pretrained(
-                self.model_name, 
-                torch_dtype=torch.float16
+                self.model_name, torch_dtype=torch.float16
             )
-            pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
+            pipe.scheduler = DPMSolverMultistepScheduler.from_config(
+                pipe.scheduler.config
+            )
             pipe.enable_model_cpu_offload()
 
             pipe.enable_vae_slicing()
@@ -116,38 +116,39 @@ class TextToVideo:
                 num_inference_steps=self.num_inference_steps,
                 height=self.height,
                 width=self.width,
-                num_frames=self.num_frames
+                num_frames=self.num_frames,
             ).frames
 
             # Upscale the video
             pipe = DiffusionPipeline.from_pretrained(
-                self.model_name, 
-                torch_dtype=torch.float16
+                self.model_name, torch_dtype=torch.float16
             )
 
-            pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
+            pipe.scheduler = DPMSolverMultistepScheduler.from_config(
+                pipe.scheduler.config
+            )
             pipe.enable_model_cpu_offload()
             pipe.enable_vae_slicing()
 
             video = [
-                Image.fromarray(frame).resize(
-                    (self.width, self.height)
-                ) for frame in video_frames
+                Image.fromarray(frame).resize((self.width, self.height))
+                for frame in video_frames
             ]
 
-            video_frames = pipe(
-                self.prompt,
-                video=video,
-                strength=self.strength
-            ).frames
+            video_frames = pipe(self.prompt, video=video, strength=self.strength).frames
 
             # Export the video
-            video_path = export_to_video(video_frames, output_video_path=self.output_video_path, output_format=self.output_format)
+            video_path = export_to_video(
+                video_frames,
+                output_video_path=self.output_video_path,
+                output_format=self.output_format,
+            )
 
-            print(colored(f'Successfully generated the video at: {video_path}', 'green'))
+            print(
+                colored(f"Successfully generated the video at: {video_path}", "green")
+            )
             return video_path
 
         except Exception as e:
-            print(colored(f'An error occurred: {str(e)}', 'red'))
-            logging.error(f'An error occurred: {str(e)}')
-
+            print(colored(f"An error occurred: {str(e)}", "red"))
+            logging.error(f"An error occurred: {str(e)}")

@@ -17,7 +17,7 @@ class Inference:
         quantization_config (dict, optional): The configuration for quantization.
         verbose (bool, optional): Whether to print verbose logs. Defaults to False.
         logger (logging.Logger, optional): The logger to use. Defaults to a basic logger.
-    
+
     # Usage
     ```
     from finetuning_suite import Inference
@@ -30,20 +30,23 @@ class Inference:
     print(generated_text)
     ```
     """
+
     def __init__(
-            self, 
-            model_id: str, 
-            device: str = None, 
-            max_length: int = 20, 
-            quantize: bool = False, 
-            quantization_config: dict = None,
-            verbose = False,
-            # logger=None,
-            distributed=False,
-            decoding=False
-        ):
+        self,
+        model_id: str,
+        device: str = None,
+        max_length: int = 20,
+        quantize: bool = False,
+        quantization_config: dict = None,
+        verbose=False,
+        # logger=None,
+        distributed=False,
+        decoding=False,
+    ):
         self.logger = logging.getLogger(__name__)
-        self.device = device if device else ('cuda' if torch.cuda.is_available() else 'cpu')
+        self.device = (
+            device if device else ("cuda" if torch.cuda.is_available() else "cpu")
+        )
         self.model_id = model_id
         self.max_length = max_length
         self.verbose = verbose
@@ -51,31 +54,30 @@ class Inference:
         self.decoding = decoding
         self.model, self.tokenizer = None, None
         # self.log = Logging()
-        
 
         if self.distributed:
-            assert torch.cuda.device_count() > 1, "You need more than 1 gpu for distributed processing"
-
+            assert (
+                torch.cuda.device_count() > 1
+            ), "You need more than 1 gpu for distributed processing"
 
         bnb_config = None
         if quantize:
             if not quantization_config:
                 quantization_config = {
-                    'load_in_4bit': True,
-                    'bnb_4bit_use_double_quant': True,
-                    'bnb_4bit_quant_type': "nf4",
-                    'bnb_4bit_compute_dtype': torch.bfloat16
+                    "load_in_4bit": True,
+                    "bnb_4bit_use_double_quant": True,
+                    "bnb_4bit_quant_type": "nf4",
+                    "bnb_4bit_compute_dtype": torch.bfloat16,
                 }
             bnb_config = BitsAndBytesConfig(**quantization_config)
 
         try:
             self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
             self.model = AutoModelForCausalLM.from_pretrained(
-                self.model_id, 
-                quantization_config=bnb_config
+                self.model_id, quantization_config=bnb_config
             )
-            
-            self.model#.to(self.device)
+
+            self.model  # .to(self.device)
         except Exception as e:
             self.logger.error(f"Failed to load the model or the tokenizer: {e}")
             raise
@@ -85,13 +87,14 @@ class Inference:
             try:
                 self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
 
-                bnb_config = BitsAndBytesConfig(
-                    **self.quantization_config
-                ) if self.quantization_config else None
+                bnb_config = (
+                    BitsAndBytesConfig(**self.quantization_config)
+                    if self.quantization_config
+                    else None
+                )
 
                 self.model = AutoModelForCausalLM.from_pretrained(
-                    self.model_id,
-                    quantization_config=bnb_config
+                    self.model_id, quantization_config=bnb_config
                 ).to(self.device)
 
                 if self.distributed:
@@ -100,11 +103,7 @@ class Inference:
                 self.logger.error(f"Failed to load the model or the tokenizer: {error}")
                 raise
 
-    def run(
-            self, 
-            prompt_text: str, 
-            max_length: int = None
-        ):
+    def run(self, prompt_text: str, max_length: int = None):
         """
         Generate a response based on the prompt text.
 
@@ -120,13 +119,11 @@ class Inference:
         max_length = max_length if max_length else self.max_length
 
         try:
-            inputs = self.tokenizer.encode(
-                prompt_text, 
-                return_tensors="pt"
-            ).to(self.device)
+            inputs = self.tokenizer.encode(prompt_text, return_tensors="pt").to(
+                self.device
+            )
 
             # self.log.start()
-
 
             if self.decoding:
                 with torch.no_grad():
@@ -134,51 +131,33 @@ class Inference:
                         output_sequence = []
 
                         outputs = self.model.generate(
-                            inputs,
-                            max_length=len(inputs) + 1, 
-                            do_sample=True
+                            inputs, max_length=len(inputs) + 1, do_sample=True
                         )
                         output_tokens = outputs[0][-1]
                         output_sequence.append(output_tokens.item())
 
-                        #print token in real-time
-                        print(self.tokenizer.decode(
-                            [output_tokens], 
-                            skip_special_tokens=True), 
+                        # print token in real-time
+                        print(
+                            self.tokenizer.decode(
+                                [output_tokens], skip_special_tokens=True
+                            ),
                             end="",
-                            flush=True
+                            flush=True,
                         )
                         inputs = outputs
             else:
                 with torch.no_grad():
                     outputs = self.model.generate(
-                        inputs, 
-                        max_length=max_length, 
-                        do_sample=True
+                        inputs, max_length=max_length, do_sample=True
                     )
-                
+
             del inputs
-
-            #stop logger
-            # self.log.stop()
-
-            # #cal number of tokens
-            # num_tokens = len(prompt_text.split())
-            # self.logger.add_tokens(num_tokens)
-
-            #print the summary of the metrics
-            # self.log.print_summary()
-
             return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
         except Exception as e:
             self.logger.error(f"Failed to generate the text: {e}")
             raise
-    
-    def __call__(
-            self, 
-            prompt_text: str, 
-            max_length: int = None
-        ):
+
+    def __call__(self, prompt_text: str, max_length: int = None):
         """
         Generate a response based on the prompt text.
 
@@ -194,13 +173,11 @@ class Inference:
         max_length = max_length if max_length else self.max_length
 
         try:
-            inputs = self.tokenizer.encode(
-                prompt_text, 
-                return_tensors="pt"
-            ).to(self.device)
+            inputs = self.tokenizer.encode(prompt_text, return_tensors="pt").to(
+                self.device
+            )
 
             # self.log.start()
-
 
             if self.decoding:
                 with torch.no_grad():
@@ -208,40 +185,27 @@ class Inference:
                         output_sequence = []
 
                         outputs = self.model.generate(
-                            inputs,
-                            max_length=len(inputs) + 1, 
-                            do_sample=True
+                            inputs, max_length=len(inputs) + 1, do_sample=True
                         )
                         output_tokens = outputs[0][-1]
                         output_sequence.append(output_tokens.item())
 
-                        #print token in real-time
-                        print(self.tokenizer.decode(
-                            [output_tokens], 
-                            skip_special_tokens=True), 
+                        # print token in real-time
+                        print(
+                            self.tokenizer.decode(
+                                [output_tokens], skip_special_tokens=True
+                            ),
                             end="",
-                            flush=True
+                            flush=True,
                         )
                         inputs = outputs
             else:
                 with torch.no_grad():
                     outputs = self.model.generate(
-                        inputs, 
-                        max_length=max_length, 
-                        do_sample=True
+                        inputs, max_length=max_length, do_sample=True
                     )
-                
+
             del inputs
-
-            # #stop logger
-            # self.log.stop()
-
-            # #cal number of tokens
-            # num_tokens = len(prompt_text.split())
-            # self.logger.add_tokens(num_tokens)
-
-            # #print the summary of the metrics
-            # self.log.print_summary()
 
             return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
         except Exception as e:

@@ -1,6 +1,7 @@
 import logging
 from termcolor import colored
 
+
 class CustomFormatter(logging.Formatter):
     """
     Custom logging formatter for color-coded logging.
@@ -11,7 +12,7 @@ class CustomFormatter(logging.Formatter):
 
     Attributes:
         format_mappings (dict): Mapping of logging levels to their associated color and format.
-    
+
     ###########
     import logging
     from exa import CustomFormatter
@@ -29,10 +30,22 @@ class CustomFormatter(logging.Formatter):
     """
 
     format_mappings = {
-        logging.DEBUG: {"color": "grey", "format": "%(asctime)s - %(levelname)s - %(message)s"},
-        logging.INFO: {"color": "green", "format": "%(asctime)s - %(levelname)s - %(message)s"},
-        logging.WARNING: {"color": "yellow", "format": "%(asctime)s - %(levelname)s - %(message)s"},
-        logging.ERROR: {"color": "red", "format": "%(asctime)s - %(levelname)s - %(message)s"},
+        logging.DEBUG: {
+            "color": "grey",
+            "format": "%(asctime)s - %(levelname)s - %(message)s",
+        },
+        logging.INFO: {
+            "color": "green",
+            "format": "%(asctime)s - %(levelname)s - %(message)s",
+        },
+        logging.WARNING: {
+            "color": "yellow",
+            "format": "%(asctime)s - %(levelname)s - %(message)s",
+        },
+        logging.ERROR: {
+            "color": "red",
+            "format": "%(asctime)s - %(levelname)s - %(message)s",
+        },
     }
 
     def format(self, record):
@@ -48,8 +61,7 @@ class CustomFormatter(logging.Formatter):
         format_dict = self.format_mappings.get(record.levelno)
         log_message = super().format(record)
         return colored(log_message, format_dict["color"])
-    
-    
+
 
 class ColoredLogger:
     """
@@ -106,14 +118,15 @@ class ColoredLogger:
         """
         logger.debug(msg)
 
+
 def log_method_calls(cls):
     """
     Decorator to log method entry and exit for classes.
-    
-    When a method of a decorated class is called, this decorator logs the 
+
+    When a method of a decorated class is called, this decorator logs the
     method's name upon entering and exiting the method. Useful for debugging
     and tracking the flow of the program.
-    
+
     ```
     from exa import log_metadata
 
@@ -130,7 +143,7 @@ def log_method_calls(cls):
     sample_instance.say_hello()
     sample_instance.say_goodbye()
     ```
-    
+
     Args:
         cls (type): The class to be wrapped.
 
@@ -158,10 +171,11 @@ def log_method_calls(cls):
             attr = super().__getattribute__(s)
 
             if callable(attr):
+
                 def wrapped(*args, **kwargs):
-                    self._logger.debug(colored(f'Entering {s} method', 'blue'))
+                    self._logger.debug(colored(f"Entering {s} method", "blue"))
                     result = attr(*args, **kwargs)
-                    self._logger.debug(colored(f'Exiting {s} method', 'blue'))
+                    self._logger.debug(colored(f"Exiting {s} method", "blue"))
                     return result
 
                 return wrapped
@@ -169,6 +183,7 @@ def log_method_calls(cls):
                 return attr
 
     return Wrapped
+
 
 # Set up the logger
 logging.basicConfig(level=logging.INFO)

@@ -1,4 +1,3 @@
-
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -11,9 +10,11 @@ app = FastAPI()
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_middleware(SlowAPIMiddleware)
 
+
 class Prompt(BaseModel):
     text: str
     max_length: int = 20
+
 
 class Deploy:
     def __init__(
@@ -35,7 +36,7 @@ class Deploy:
         @self.app.post("/generate/")
         async def generate(prompt: Prompt):
             return self.generate(prompt)
-        
+
     def load_model(self):
         global inference
         inference = self.llm
@@ -48,6 +49,7 @@ class Deploy:
 
     def run(self):
         uvicorn.run(self.app, host=self.host, port=self.port)
+
 
 # if __name__ == "__main__":
 #     llm = Inference(model_id="gpt2-small")  # replace with your LLM
