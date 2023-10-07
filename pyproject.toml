@@ -49,6 +49,9 @@ ctransformers = "*"
 nvitop = "*" 
 hf-transfer = "*"
 sentry-sdk = "*"
+black = "*"
+autopep8 = "*"
+
 
 
 [tool.poetry.dev-dependencies]
