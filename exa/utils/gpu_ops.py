@@ -63,28 +63,11 @@ def calculate_model_memory_consumption(model, gpu_id=0):
     torch.cuda.synchronize(gpu_id)
 
     allocated_memory_before = memory_allocated(gpu_id)
-    with torch.no_grad():
-        # Forward pass to ensure any additional memory allocations are accounted for
-        try:
-            # Assuming model has a dummy forward pass method for memory calculation
-            input_size = (
-                1,
-                *model.input_shape,
-            )  # Example input size, adjust as needed
-            dummy_input = torch.zeros(input_size).cuda(gpu_id)
-            model(dummy_input)
-        except AttributeError:
-            pass  # Model does not have .input_shape or cannot perform a dummy forward pass
-
     torch.cuda.synchronize(gpu_id)
     allocated_memory_after = memory_allocated(gpu_id)
     model_memory_consumption = (
         allocated_memory_after - allocated_memory_before
     )
-
-    # Clean up and move model back to original device
-    dummy_input = dummy_input.cpu()
-    model.to(original_device)
 
     return model_memory_consumption
 
