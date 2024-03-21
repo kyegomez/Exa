@@ -6,6 +6,7 @@ from exa.utils.dist_process_init import initialize_distributed
 
 initialize_distributed()
 
+
 def fused_all_reduce_v1(tensor: Tensor, op=dist.ReduceOp.SUM):
     """
     Hyper-optimized fused all_reduce operation with reduced communication overhead.
@@ -47,11 +48,9 @@ def fused_all_reduce_v1(tensor: Tensor, op=dist.ReduceOp.SUM):
 
     # Copy the accumulated buffer back to the original tensor
     tensor[:] = accum_buff
-    
-    
-    
-    
-def fused_all_reduce_v2(tensor: Tensor, op = dist.ReduceOp.SUM):
+
+
+def fused_all_reduce_v2(tensor: Tensor, op=dist.ReduceOp.SUM):
     """
     Perform an all-reduce operation on the given tensor using the specified reduction operation.
 
@@ -63,12 +62,11 @@ def fused_all_reduce_v2(tensor: Tensor, op = dist.ReduceOp.SUM):
         Tensor: The tensor after the all-reduce operation has been applied.
     """
     initialize_distributed()
-    
+
     # Use pytorch's built-in all_reduce
     return dist.all_reduce(tensor, op)
-    
+
+
 x = torch.tensor([1, 2, 3, 4, 5], dtype=torch.float32)
 fused_all_reduce_v1(x)  # Output: tensor([ 1.,  2.,  3.,  4.,  5.])
 print(x)
-
-
