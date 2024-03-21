@@ -1,5 +1,5 @@
 import torch
-import torch.distributed as dist
+from torch import distributed as dist
 from torch.cuda import (
     memory_allocated,
     get_device_properties,
