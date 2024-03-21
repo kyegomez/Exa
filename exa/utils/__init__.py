@@ -7,8 +7,7 @@ from exa.utils.gpu_ops import (
     calculate_total_memory_across_gpus,
     calculate_total_available_memory_across_gpus,
 )
-from exa.cluster_init import cluster_init
-
+from exa.utils.dist_process_init import initialize_distributed
 
 __all__ = [
     "get_world_size_rank",
@@ -16,7 +15,6 @@ __all__ = [
     "calculate_available_memory",
     "calculate_model_memory_consumption",
     "available_memory_after_model_load",
-    "cluster_init",
     "calculate_total_memory_across_gpus",
     "calculate_total_available_memory_across_gpus",
 ]
