@@ -12,6 +12,11 @@ def run_gpu_ops():
     # Calculate available memory on every gpu
     total_memory = gpu_ops.calculate_total_memory_across_gpus()
     print(f"Total memory across all GPUs: {total_memory} GB")
+    
+    
+    # Calculate available memory on every gpu
+    total_available_memory = gpu_ops.calculate_total_available_memory_across_gpus()
+    print(f"Total available memory across all GPUs: {total_available_memory} GB")
 
     if torch.cuda.is_available():
         available_memory = gpu_ops.calculate_available_memory()

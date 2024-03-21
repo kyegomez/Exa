@@ -44,25 +44,28 @@ def calculate_available_memory(gpu_id=0):
 
 def calculate_total_memory_across_gpus():
     """
-    Calculates the total memory across all available GPUs.
-
+    Calculates the total memory across all GPUs in GB.
     Returns:
-        float: The total memory in gigabytes (GB) across all GPUs.
+        total_memory_gb (float): Total memory across all GPUs in gigabytes.
     """
-    total_memory = 0.0
+    total_memory_gb = 0.0
     for gpu_id in range(get_num_gpus_available()):
-        total_memory += get_device_properties(gpu_id).total_memory
-        total_memory += total_memory / (1024 ** 3) # Convert bytes to GB
-    return total_memory
+        total_memory = get_device_properties(gpu_id).total_memory
+        total_memory_gb += total_memory / (1024 ** 3)  # Convert bytes to GB
+    return total_memory_gb
 
-def calculate_available_memory_across_gpus():
-    total_memory = 0.0
+
+def calculate_total_available_memory_across_gpus():
+    """
+    Calculates the total available memory across all GPUs in GB.
+    Returns:
+        total_available_memory_gb (float): Total available memory across all GPUs in gigabytes.
+    """
+    total_available_memory_gb = 0.0
     for gpu_id in range(get_num_gpus_available()):
         available_memory = calculate_available_memory(gpu_id)
-        total_memory += available_memory
-    return total_memory
-
-
+        total_available_memory_gb += available_memory  # Assuming available_memory is already in GB
+    return total_available_memory_gb
 
 
 
