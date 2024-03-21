@@ -1,6 +1,6 @@
 import torch
 import torch.distributed as dist
-from torch.cuda import memory_allocated
+from torch.cuda import memory_allocated, get_device_properties, memory_reserved
 
 
 def get_world_size_rank():
@@ -9,7 +9,7 @@ def get_world_size_rank():
     """
     if not dist.is_initialized():
         # Assuming a default setup if not running in a distributed context
-        world_size = 1
+        world_size = torch.cuda.device_count()  # Adjusted to consider the number of GPUs as world size
         rank = 0
     else:
         world_size = dist.get_world_size()
@@ -26,27 +26,45 @@ def get_num_gpus_available():
 
 def calculate_available_memory(gpu_id=0):
     """
-    Calculates the available memory on a specified GPU.
+    Calculates the available memory on a specified GPU in GB.
     """
-    if (
-        not torch.cuda.is_available()
-        or gpu_id >= get_num_gpus_available()
-    ):
-        raise RuntimeError(
-            "CUDA is not available or the specified GPU ID is out of"
-            " bounds."
-        )
+    if not torch.cuda.is_available() or gpu_id >= get_num_gpus_available():
+        raise RuntimeError("CUDA is not available or the specified GPU ID is out of bounds.")
 
     torch.cuda.set_device(gpu_id)
-    total_memory = torch.cuda.get_device_properties(
-        gpu_id
-    ).total_memory
-    allocated_memory = torch.cuda.memory_allocated(gpu_id)
-    cached_memory = torch.cuda.memory_reserved(gpu_id)
-    available_memory = total_memory - (
-        allocated_memory + cached_memory
-    )
-    return available_memory
+    total_memory = get_device_properties(gpu_id).total_memory
+    allocated_memory = memory_allocated(gpu_id)
+    cached_memory = memory_reserved(gpu_id)
+    available_memory_bytes = total_memory - (allocated_memory + cached_memory)
+    return available_memory_bytes / (1024 ** 3)  # Convert to GB
+
+
+
+
+
+def calculate_total_memory_across_gpus():
+    """
+    Calculates the total memory across all available GPUs.
+
+    Returns:
+        float: The total memory in gigabytes (GB) across all GPUs.
+    """
+    total_memory = 0.0
+    for gpu_id in range(get_num_gpus_available()):
+        total_memory += get_device_properties(gpu_id).total_memory
+        total_memory += total_memory / (1024 ** 3) # Convert bytes to GB
+    return total_memory
+
+def calculate_available_memory_across_gpus():
+    total_memory = 0.0
+    for gpu_id in range(get_num_gpus_available()):
+        available_memory = calculate_available_memory(gpu_id)
+        total_memory += available_memory
+    return total_memory
+
+
+
+
 
 
 def calculate_model_memory_consumption(model, gpu_id=0):
