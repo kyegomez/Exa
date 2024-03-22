@@ -4,6 +4,7 @@ from typing import List
 from torch import Tensor
 
 
+# Fused all_gather operations
 def fused_all_gather_v1(tensor_list: List[Tensor], tensor: Tensor):
     """
     Fused all_gather operation optimized for speed. Version 1 focuses on minimizing communication overhead.
@@ -48,6 +49,7 @@ def fused_all_gather_v1(tensor_list: List[Tensor], tensor: Tensor):
         )
 
 
+# Fused all_gather operations
 def fused_all_gather_v2(tensor_list: List[Tensor], tensor: Tensor):
     """
     Fused all_gather operation optimized for speed. Version 2 focuses on reducing memory footprint.
