@@ -16,6 +16,8 @@ from exa.utils.fused_all_gather import (
     fused_all_gather_v1,
     fused_all_gather_v2,
 )
+from exa.utils.count_cores_for_workers import calculate_workers
+
 
 __all__ = [
     "get_world_size_rank",
@@ -30,4 +32,5 @@ __all__ = [
     "fused_all_reduce_v2",
     "fused_all_gather_v1",
     "fused_all_gather_v2",
+    "calculate_workers",
 ]
