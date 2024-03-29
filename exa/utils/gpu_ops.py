@@ -6,8 +6,6 @@ from torch.cuda import (
     memory_reserved,
 )
 
-#
-
 
 def get_world_size_rank():
     """
