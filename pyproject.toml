@@ -4,13 +4,13 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "exxa"
-version = "0.6.3"
+version = "0.6.5"
 description = "Exa - Pytorch"
 license = "MIT"
 authors = ["Kye Gomez <kye@apac.ai>"]
 homepage = "https://github.com/kyegomez/Exa"
 documentation = "https://github.com/kyegomez/Exa"
-readme = "README.md"  # Assuming you have a README.md
+readme = "README.md"
 repository = "https://github.com/kyegomez/Exa"
 keywords = ["artificial intelligence", "deep learning", "optimizers", "Prompt Engineering"]
 classifiers = [
