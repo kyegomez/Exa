@@ -1,10 +1,10 @@
 import torch
 from torch import Tensor
 import torch.distributed as dist
-from exa.utils.dist_process_init import initialize_distributed
+# from exa.utils.dist_process_init import initialize_distributed
 
 
-initialize_distributed()
+# initialize_distributed()
 
 
 def fused_all_reduce_v1(tensor: Tensor, op=dist.ReduceOp.SUM):
@@ -61,12 +61,11 @@ def fused_all_reduce_v2(tensor: Tensor, op=dist.ReduceOp.SUM):
     Returns:
         Tensor: The tensor after the all-reduce operation has been applied.
     """
-    initialize_distributed()
 
     # Use pytorch's built-in all_reduce
     return dist.all_reduce(tensor, op)
 
 
-x = torch.tensor([1, 2, 3, 4, 5], dtype=torch.float32)
-fused_all_reduce_v1(x)  # Output: tensor([ 1.,  2.,  3.,  4.,  5.])
-print(x)
+# x = torch.tensor([1, 2, 3, 4, 5], dtype=torch.float32)
+# fused_all_reduce_v1(x)  # Output: tensor([ 1.,  2.,  3.,  4.,  5.])
+# print(x)

@@ -12,12 +12,11 @@ Boost your GPU's LLM performance by 300% on everyday GPU hardware, as validated 
 
 ---
 
-## 📦 Installation 📦
+## 📦 Install 📦
 ```bash
 $ pip3 install exxa
 ```
 -----
-
 
 
 ## Usage
